@@ -8,3 +8,4 @@ This product will be a to do list web application that aims to collect assignmen
 
 - All backend code contained in src/main/java.
 - All configuration/set up content contained in .idea folder.
+- All tests will be contained in the tests folder.
