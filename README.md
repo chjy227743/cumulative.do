@@ -5,4 +5,4 @@
 
 ## Repository Layout:
 #### All backend code contained in src/main/java.
-#### All configuration/set up content contained in src/idea.
+#### All configuration/set up content contained in .idea folder.
