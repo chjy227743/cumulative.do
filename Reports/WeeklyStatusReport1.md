@@ -10,7 +10,7 @@ As a team, we spend the past week finally beginning our project. We divided our 
 
 ### Plans & Goals For Upcoming Week:
 
-Finish coding the front-end appearance of the application through HTML and CSS.
+* Finish coding the front-end appearance of the application through HTML and CSS.
 Task Assigned To: Drishya & Hai
 Time Estimate: 1 Day
 Finish coding the basic to-do list functionality through JavaScript.
