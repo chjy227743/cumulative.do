@@ -11,20 +11,20 @@ As a team, we spend the past week finally beginning our project. We divided our 
 ### Plans & Goals For Upcoming Week:
 
 * Finish coding the front-end appearance of the application through HTML and CSS.
-** Task Assigned To: Drishya & Hai
-** Time Estimate: 1 Day
+    * Task Assigned To: Drishya & Hai
+    * Time Estimate: 1 Day
 * Finish coding the basic to-do list functionality through JavaScript.
-** Task Assigned To: Drishya & Hai
-** Time Estimate: 2 Days
+    * Task Assigned To: Drishya & Hai
+    * Time Estimate: 2 Days
 * Finish researching about canvas API technology.
-** Task Assigned To: Yuzhen & Carrie
-** Time Estimate: 2 Days
+    * Task Assigned To: Yuzhen & Carrie
+    * Time Estimate: 2 Days
 * Finish researching about web scraping.
-** Task Assigned To: Yuzhen & Carrie
-** Time Estimate: 2 Days
+    * Task Assigned To: Yuzhen & Carrie
+    * Time Estimate: 2 Days
 * Implement basic login functionality.
-** Task Assigned To: Yuzhen & Carrie
-** Time Estimate: 3 Days
+    * Task Assigned To: Yuzhen & Carrie
+    * Time Estimate: 3 Days
 
 In the upcoming project meeting, we will meet with our project manager, discuss what other backend tasks need to be done, and finalize the timeline for Drishya and Hai’s transition to helping on the back-end after they are completed with the front-end.
 
