@@ -54,33 +54,32 @@ Carrie: Carrie, along with Yuzhen, set up Maven and the link packages, decided o
 
 Drishya:
 * Finish coding the front-end appearance of the application through HTML and CSS.
-** Time Estimate: 1 Day
+    * Time Estimate: 1 Day
 * Finish coding the basic to-do list functionality through JavaScript.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 
 Hai:
 * Finish coding the front-end appearance of the application through HTML and CSS.
-** Time Estimate: 1 Day
+    * Time Estimate: 1 Day
 * Finish coding the basic to-do list functionality through JavaScript.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 
 Yuzhen:
 * Finish researching about canvas API technology.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 * Finish researching about web scraping.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 * Finish writing documentation.
-** Time Estimate: 1 Day
+    * Time Estimate: 1 Day
 * Implement basic login functionality.
-** Time Estimate: 3 Days
+    * Time Estimate: 3 Days
 
 Carrie:
 * Finish researching about canvas API technology.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 * Finish researching about web scraping.
-** Time Estimate: 2 Days
+    * Time Estimate: 2 Days
 * Finish writing documentation.
-** Time Estimate: 1 Day
+    * Time Estimate: 1 Day
 * Implement basic login functionality.
-** Time Estimate: 3 Days
-
+   * Time Estimate: 3 Days
