@@ -5,6 +5,21 @@ The following was discovered as part of building this project:
 
 # Getting Started
 
+### Setting up Maven
+To ensure Maven is properly setup on your IDE, please follow the steps below:
+1. Download the newest version of Maven's zip archive from https://maven.apache.org/download.cgi
+2. Decompress the zip file and place it in User/<user>/opt
+3. Open terminal and open `.zshrc` through vim 
+4. Add the following lines of code into the file <br>
+   `export M2_HOME=/Users/<userName>/opt/apache-maven-3.9.1` <br>
+   `export PATH=$PATH:$M2_HOME/bin` <br>
+    Save and close the file.
+5. Recompile `.zshrc` by running `source ~/.zshrc` in the command line terminal
+6. Run the `mvn -v` command to ensure Maven has been properly set up.
+
+Note: If your MacOS uses an older version, replace all `zshrc` in the instructions by `bash_profile`.
+
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
