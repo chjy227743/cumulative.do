@@ -11,7 +11,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/todoItem")
 public class ToDoItemController {
-    // key is user id which is mapped to the set of todo items
+    // key for Map is user id which is mapped to the set of todo items
     private Map<Long, Set<ToDoItem>> items;
 
     /**
