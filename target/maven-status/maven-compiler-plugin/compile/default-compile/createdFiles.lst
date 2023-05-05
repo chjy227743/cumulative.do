@@ -1,0 +1,9 @@
+controller/UserController.class
+app/CumulativeDo.class
+server/utils/CORSFilter.class
+server/SparkServer$1.class
+model/ToDoItem.class
+model/User.class
+server/SparkServer.class
+controller/ToDoItemController.class
+server/utils/CORSFilter$1.class

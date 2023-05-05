@@ -1,6 +1,7 @@
 package controller;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.Data;
 import model.ToDoItem;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/users")
 
+@Data
 public class UserController {
     // @Autowired
     // private UserRepository userRepository;
