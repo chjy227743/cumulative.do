@@ -1,35 +1,37 @@
+package controllerTests;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import javax.servlet.http.HttpSession;
 
 import java.util.HashSet;
 
-import org.junit.jupiter.api.Assertions.*;
-
 import model.*;
 import controller.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UserControllerTest {
     private UserController userController;
-    private User user;
+    private User testUser1;
     private HttpSession testSession;
 
     @BeforeEach
     public void setUp() {
         userController = new UserController();
-        userController.users = new HashSet<>();
-        user = new User("John Doe", "john.doe@example.com", "12341234");
+        testUser1 = new User(1L, "john.doe@example.com", "12341234");
         testSession = new TestHttpSession();
     }
 
     @Test
     void registerNonExistingUserTest() {
-        ResponseEntity<?> response = userController.registerUser(testUser);
+        ResponseEntity<?> response = userController.registerUser(testUser1);
 
-        assertTrue(userController.users.contains(testUser));
+        assertTrue(userController..contains(testUser));
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(testUser, response.getBody());
     }

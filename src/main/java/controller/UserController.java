@@ -30,7 +30,7 @@ public class UserController {
         boolean userExists = users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
 
         if (userExists) {
-            return new ResponseEntity<>("Username already exists.", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("User already exists.", HttpStatus.CONFLICT);
         }
 
         // Register the new user
@@ -98,14 +98,18 @@ public class UserController {
         }
     }
 
+    public boolean loggedIn(User user, HttpSession session) {
+
+    }
+
     private boolean isPasswordCorrect(User user) {
         // TODO: implement password check
         return false;
     }
 
-    private boolean updateUserInfo(User loggedInUser) {
-        // TODO: this function does not need to be implemented, but frontend logic needs to be connected
-        return false;
-    }
+//    private boolean updateUserInfo(User loggedInUser) {
+//        // TODO: this function does not need to be implemented, but frontend logic needs to be connected
+//        return false;
+//    }
 
 }

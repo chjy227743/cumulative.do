@@ -1,9 +1,7 @@
 package controller;
 
-import model.ToDoItem;
-import model.User;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import model.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -51,4 +49,20 @@ public class ToDoItemController {
 
         return new ResponseEntity<>(todoItems, HttpStatus.OK);
     }
+
+    @PostMapping
+    public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody long userId, ToDoItem todoItem) {
+        UserController user = new UserController();
+        if (user.)
+        Set<ToDoItem> existingItems = items.get(userId);
+        existingItems.add(todoItem);
+        items.put(userId, existingItems);
+
+        // Return the ResponseEntity with the added todoItem and HTTP status code 201 (Created)
+        return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
+    }
+
+    // mark complete
+
+
 }
