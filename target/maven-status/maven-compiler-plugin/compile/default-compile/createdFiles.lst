@@ -1,5 +1,0 @@
-model/ToDoItem.class
-model/User.class
-controller/UserController.class
-app/CumulativeDo.class
-controller/ToDoItemController.class

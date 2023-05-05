@@ -15,6 +15,7 @@ public class UserController {
     // @Autowired
     // private UserRepository userRepository;
     private Set<User> users;
+    private Set<Long> loggedUsers;
 
     // Validate and register user, return appropriate response
 
@@ -58,7 +59,7 @@ public class UserController {
         if (userExists && isPasswordCorrect(user)) {
             // Store the logged-in user in the session
             session.setAttribute("loggedInUser", user);
-
+            loggedUsers.add(user.getId());
             // Return the ResponseEntity with the user and HTTP status code 200 (OK)
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
@@ -98,8 +99,8 @@ public class UserController {
         }
     }
 
-    public boolean loggedIn(User user, HttpSession session) {
-
+    public boolean loggedIn(long userId, HttpSession session) {
+        return loggedUsers.contains(userId);
     }
 
     private boolean isPasswordCorrect(User user) {
@@ -107,9 +108,9 @@ public class UserController {
         return false;
     }
 
-//    private boolean updateUserInfo(User loggedInUser) {
-//        // TODO: this function does not need to be implemented, but frontend logic needs to be connected
-//        return false;
-//    }
+    private boolean updateUserInfo(User loggedInUser) {
+        // TODO: this function does not need to be implemented, but frontend logic needs to be connected
+        return false;
+    }
 
 }

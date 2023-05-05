@@ -53,12 +53,12 @@ public class ToDoItemController {
     @PostMapping
     public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody long userId, ToDoItem todoItem) {
         UserController user = new UserController();
-        if (user.)
-        Set<ToDoItem> existingItems = items.get(userId);
-        existingItems.add(todoItem);
-        items.put(userId, existingItems);
-
-        // Return the ResponseEntity with the added todoItem and HTTP status code 201 (Created)
+        // if the user is logged in
+        if (user.loggedIn(userId , null)) {
+            Set<ToDoItem> existingItems = items.get(userId);
+            existingItems.remove(todoItem);
+            return new ResponseEntity<>(todoItem, HttpStatus.OK);
+        }
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
     }
 
