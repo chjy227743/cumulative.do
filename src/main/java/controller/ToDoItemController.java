@@ -14,6 +14,9 @@ public class ToDoItemController {
     // key for Map is user id which is mapped to the set of todo items
     private Map<Long, Set<ToDoItem>> items;
 
+    public ToDoItemController() {
+        this.items = new HashMap<>();
+    }
     /**
      * Adds a new ToDo item for the user.
      *
@@ -38,10 +41,10 @@ public class ToDoItemController {
      * @return A ResponseEntity containing a list of the user's ToDo items, with an HTTP status code.
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getTodoItems(@PathVariable long userId) {
+    public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable long userId) {
 
         if (!items.containsKey(userId)) {
-            return new ResponseEntity<>("Failed to find user.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
         Set<ToDoItem> todoItems = items.get(userId);
