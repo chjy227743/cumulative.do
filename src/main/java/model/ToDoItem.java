@@ -39,4 +39,11 @@ public class ToDoItem {
         this.course = course;
         this.dueDate = dueDate;
     }
+
+    /**
+     * Marks the todo item as complete.
+     */
+    public void markComplete() {
+        this.completed = true;
+    }
 }
