@@ -11,7 +11,7 @@ public class WebScraper {
     public WebScraper(String courseId) {
         this.courseId = courseId;
         // possible keywords to find page of assignments
-        keywords = new HashSet<>(List.of("assignment", "lab", "homework", "exercise",
+        keywords = new HashSet<String>(List.of("assignment", "lab", "homework", "exercise",
                 "guiz", "exam", "schedule", "calendar"));
     }
 
@@ -21,7 +21,10 @@ public class WebScraper {
      */
     public String fetchCurrentURL() {
         // TODO: implement function #1
-        return null;
+        // TODO: assume quarter to be 23sp for demo. Will be replaced with a function
+        String quarter = "23sp";
+        // Assume all courses conform to the same URL format
+        return "https://courses.cs.washington.edu/courses/" + courseId + "/23sp/";
     }
 
     /**
