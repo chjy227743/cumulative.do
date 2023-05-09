@@ -71,17 +71,17 @@ public class WebScraper {
         // Finds the list of HTML page accessible from the course website.
         // TODO: implement function #2
         String root = fetchCurrentURL();
+        String navURL = root + "site/nav-bar.html";
         Set<String> urls = new HashSet<>();
 
-        Document doc = Jsoup.connect(root).get();
-        Elements linkElements = doc.select("a");
-
+        Document doc = Jsoup.connect(navURL).get();
+        //System.out.println(doc);
 
         Element content = doc.body();
         Elements links = content.getElementsByTag("a");
         for (Element link : links) {
-            String linkHref = link.attr("href");
-            urls.add(linkHref);
+            String url = link.absUrl("href");
+            urls.add(url);
         }
 
         return urls;
