@@ -21,7 +21,7 @@ public class WebScraper {
 
         // possible keywords to find page of assignments
         keywords = new HashSet<String>(List.of("assignment", "lab", "homework", "exercise",
-                "guiz", "exam", "schedule", "calendar"));
+                "quiz", "exam", "schedule", "calendar"));
     }
 
     /**
@@ -32,7 +32,7 @@ public class WebScraper {
         // TODO: implement function #1
         // TODO: assume quarter to be 23sp for demo. Will be replaced with a function
         // finds the web page for the course id
-        String html = "http://courses.cs.washington.edu/courses/" + this.courseId + "/";
+        String html = "https://courses.cs.washington.edu/courses/" + this.courseId + "/";
         Document doc = Jsoup.connect(html).get();
 
         // get the element where the current quarter course is located
@@ -78,11 +78,10 @@ public class WebScraper {
 
 
         Element content = doc.body();
-        System.out.println(content);
         Elements links = content.getElementsByTag("a");
         for (Element link : links) {
             String linkHref = link.attr("href");
-            System.out.println(linkHref);
+            urls.add(linkHref);
         }
 
         return urls;
