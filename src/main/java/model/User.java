@@ -14,19 +14,18 @@ import lombok.Data;
 public class User {
     // @Id
     // @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+//    private Long id;
     private String username;
     private String password;
 
     /**
      * Constructs a new User instance with the specified parameters.
      *
-     * @param id       the unique identifier for the user
-     * @param username the username of the user
+     * @param username the username of the user (unique identifier)
      * @param password the password of the user
      */
-    public User(Long id, String username, String password) {
-        this.id = id;
+    public User(String username, String password) {
+//        this.id = id;
         this.username = username;
         this.password = password;
     }

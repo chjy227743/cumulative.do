@@ -16,7 +16,12 @@ public class UserController {
     // @Autowired
     // private UserRepository userRepository;
     private Set<User> users;
-    private Set<Long> loggedUsers;
+    private Set<String> loggedUsers;
+
+    public UserController() {
+        users = new HashSet<>();
+        loggedUsers = new HashSet<>();
+    }
 
     // Validate and register user, return appropriate response
 
@@ -60,7 +65,7 @@ public class UserController {
         if (userExists && isPasswordCorrect(user)) {
             // Store the logged-in user in the session
             session.setAttribute("loggedInUser", user);
-            loggedUsers.add(user.getId());
+            loggedUsers.add(user.getUsername());
             // Return the ResponseEntity with the user and HTTP status code 200 (OK)
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
@@ -100,8 +105,8 @@ public class UserController {
         }
     }
 
-    public boolean loggedIn(long userId, HttpSession session) {
-        return loggedUsers.contains(userId);
+    public boolean loggedIn(String userName, HttpSession session) {
+        return loggedUsers.contains(userName);
     }
 
     private boolean isPasswordCorrect(User user) {
