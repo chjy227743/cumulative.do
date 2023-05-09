@@ -2,8 +2,7 @@ package controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
-import model.ToDoItem;
-import model.User;
+import model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;

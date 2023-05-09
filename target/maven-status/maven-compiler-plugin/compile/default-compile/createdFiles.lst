@@ -1,4 +1,5 @@
 controller/UserController.class
+scraper/WebScraper.class
 app/CumulativeDo.class
 server/utils/CORSFilter.class
 server/SparkServer$1.class

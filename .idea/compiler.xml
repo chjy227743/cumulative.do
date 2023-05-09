@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cumulative.do" target="17" />
+      <module name="cumulative.do" target="20" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
