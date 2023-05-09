@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+}
+
+#list {
+  margin: 0;
+  padding: 0;
+}
+
+#list {
+  margin-top: 30px;
+}
+
+#list li {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: left;
+  padding-left: 20px;
+  list-style: none;
+}
+
+#list li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+#list li:hover {
+  background: #ddd;
+}
+
+.finished {
+  background: #888;
+  text-decoration: line-through;
+}
+
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+header {
+  background-color: #D9D9D9;
+  margin-top: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin-top: 0;
+  padding-right: 25px;
+}
+
+.navbar-item {
+  margin: 20px 0;
+  margin-left: 40px;
+}
+
+.navbar-item a {
+  text-decoration: none;
+  font-weight: 200;
+  font-size: 1.2em;
+  color: black;
+}
+
+.navbar-item a:hover {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+h1 {
+ margin-left: 20px;
+ margin-right: auto;
+}
+
+#taskInserter {
+  display: flex;
+  justify-content: center;
+}
