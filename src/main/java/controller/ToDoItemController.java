@@ -1,6 +1,6 @@
 package controller;
 
-import model.*;
+import model.ToDoItem;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
