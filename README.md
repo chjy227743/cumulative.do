@@ -29,6 +29,11 @@ To run the tests using Maven: mvn test
 This command will run all the test cases in the project. If the tests pass, you will see a "BUILD SUCCESS" message at the end of the output, along with a summary of the test results.
 Remember that the tests require a working internet connection to function correctly since they interact with the web scraper component. If you encounter issues while running the tests, please ensure that you have a stable internet connection and that the target websites are accessible.
 
+### Run Frontend
+
+1. Go to directory `src/frontend`
+2. Click open `login.html` to launch the webpage
+
 ## Operational Use Cases:
 
 - Use Case #2: Manually input TODO item.
