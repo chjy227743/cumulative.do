@@ -25,6 +25,7 @@
     listItem.textContent = taskValue + ", " + descriptionValue + ", " + dueDateValue;
     let parent = id("list");
     listItem.addEventListener("click", e => {finishedTask(e)});
+    listItem.addEventListener("dblclick", e => {removeTask(e)});
     parent.appendChild(listItem);
   }
 
@@ -33,6 +34,13 @@
     clickedElement.classList.toggle("finished");
     console.log("task is done");
   }
+
+  function removeTask(event) {
+    let clickedElement = event.target;
+    let parent = id("list");
+    parent.removeChild(clickedElement);
+  }
+
 
   /**
    * Returns the element that has the ID attribute with the specified value.
