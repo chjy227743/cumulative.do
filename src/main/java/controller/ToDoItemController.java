@@ -64,7 +64,7 @@ public class ToDoItemController {
      * @return A ResponseEntity containing the user's removed todoItem, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody long userId, ToDoItem todoItem) {
+    public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody String userId, ToDoItem todoItem) {
         UserController user = new UserController();
         // if the user is logged in
         if (user.loggedIn(userId , null)) {
@@ -83,7 +83,7 @@ public class ToDoItemController {
      * @return A ResponseEntity containing the user's completed todoItem, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> completeToDoItem(@RequestBody long userId, ToDoItem todoItem) {
+    public ResponseEntity<ToDoItem> completeToDoItem(@RequestBody String userId, ToDoItem todoItem) {
         UserController user = new UserController();
         // if the user is logged in
         if (user.loggedIn(userId , null)) {
