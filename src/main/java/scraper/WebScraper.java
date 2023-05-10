@@ -63,7 +63,33 @@ public class WebScraper {
      */
     public Set<String> findKeywordURL() {
         // TODO: implement function #3
-        return null;
+        Set<String> keywordUrls = new HashSet<>();
+        try {
+            Set<String> urls = findAllURL();
+            for (String url : urls) {
+                Document doc = Jsoup.connect(url).get();
+                String title = doc.title().toLowerCase();
+                boolean containsKeyword = false;
+
+                for (String keyword : keywords) {
+                    keyword = keyword.toLowerCase();
+                    if (url.toLowerCase().contains(keyword) || title.contains(keyword)) {
+                        containsKeyword = true;
+                        break;
+                    }
+                }
+
+                if (containsKeyword) {
+                    keywordUrls.add(url);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("IOException in findKeywordURL" + e.getStackTrace());
+        }
+        return keywordUrls;
+
+
+
     }
 
 

@@ -95,4 +95,9 @@ public class ToDoItemController {
         }
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
     }
+
+    public long getId() {
+        id++;
+        return id;
+    }
 }

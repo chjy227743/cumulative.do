@@ -2,6 +2,7 @@ package server;
 
 import controller.ToDoItemController;
 import controller.UserController;
+import model.ToDoItem;
 import model.User;
 import server.utils.CORSFilter;
 import com.google.gson.Gson;
@@ -10,6 +11,10 @@ import spark.Response;
 import spark.Route;
 import spark.Spark;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 public class SparkServer {
 
     public static void main(String[] args) {
@@ -30,14 +35,37 @@ public class SparkServer {
                 String username = request.queryParams("username");
                 String password = request.queryParams("password");
 
-                User user = new User(2L, username, password);
-                userController.registerUser(new User(2L, username, password));
+                User user = new User(username, password);
+                userController.registerUser(user);
                 // Return a response indicating success or failure
                 Gson gson = new Gson();
                 return gson.toJson(user);
             }
         });
 
-        // Add more routes for other functionality as needed
+        Spark.post("/addTodo", new Route() {
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                String todo = request.queryParams("description");
+                String course = request.queryParams("course");
+                String dueDate = request.queryParams("date");
+                Date date;
+                // parse the date
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    date = formatter.parse(dueDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+
+                ToDoItem toDoItem = new ToDoItem(toDoItemController.getId(), todo, course, date);
+                Gson gson = new Gson();
+                return gson.toJson(toDoItem);
+            }
+        });
+
+
+
     }
 }

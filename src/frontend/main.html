@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+  ***
+  Name: Drishya Nair
+  Date: May 9, 2023
+  Class: CSE 403
+
+  This is the main.html page that contains the website title abd basic todo list
+  content.
+  ***
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+    <title>cumulative.do</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="website-title">cumulative.do</h1>
+      <nav>
+        <ul class="navbar">
+          <li class="navbar-item">
+            <a href="main.html">To Do</a>
+          </li>
+          <li class="navbar-item">
+            <a href="account.html">Account</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h1>Weekly To Do:</h1>
+      </section>
+      <section id="taskInserter">
+        <input type="text" id="inputForm" placeholder="Insert Task Here...">
+        <button id="taskInserterBtn">Add Task</button>
+      </section>
+      <ul id="list">
+      </ul>
+    </main>
+  </body>
+</html>
