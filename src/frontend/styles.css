@@ -20,11 +20,7 @@ body {
 }
 
 #list li:nth-child(odd) {
-<<<<<<< HEAD
-  background: #f9f9f9;
-=======
   background-color: #F6F6F6;
->>>>>>> origin/main
 }
 
 #list li:hover {
@@ -32,10 +28,6 @@ body {
 }
 
 .finished {
-<<<<<<< HEAD
-  background: #888;
-=======
->>>>>>> origin/main
   text-decoration: line-through;
 }
 
@@ -47,10 +39,7 @@ input {
   padding: 10px;
   float: left;
   font-size: 16px;
-<<<<<<< HEAD
-=======
   font-family: 'Share Tech Mono', monospace;
->>>>>>> origin/main
 }
 
 header {
@@ -64,13 +53,8 @@ header {
   display: flex;
   flex-direction: row;
   list-style: none;
-<<<<<<< HEAD
-  margin-top: 0;
-  padding-right: 25px;
-=======
   padding-right: 35px;
   font-family: 'Share Tech Mono', monospace;
->>>>>>> origin/main
 }
 
 .navbar-item {
@@ -91,15 +75,6 @@ header {
 }
 
 h1 {
-<<<<<<< HEAD
- margin-left: 20px;
- margin-right: auto;
-}
-
-#taskInserter {
-  display: flex;
-  justify-content: center;
-=======
   font-family: 'Lobster', cursive;
   margin-left: 20px;
   margin-right: auto;
@@ -172,5 +147,4 @@ button {
   border-width: 2px;
   margin-top: 10px;
   border-color: lavender;
->>>>>>> origin/main
 }
