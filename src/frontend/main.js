@@ -1,6 +1,9 @@
 'use strict';
 (function() {
 
+  let username;
+  let password;
+
   window.addEventListener('load', init);
 
   /**
@@ -12,7 +15,7 @@
   }
 
   function insertTask() {
-    let task = document.getElementById("inputForm");
+    let task = id("inputForm");
     let formValue = task.value;
     let listItem = document.createElement("li");
     listItem.textContent = formValue;
