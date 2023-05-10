@@ -15,10 +15,14 @@
   }
 
   function insertTask() {
-    let task = id("inputForm");
-    let formValue = task.value;
+    let task = id("inputForm1");
+    let taskValue = task.value;
+    let description = id("inputForm2");
+    let descriptionValue = description.value;
+    let dueDate = id("inputForm3");
+    let dueDateValue = dueDate.value;
     let listItem = document.createElement("li");
-    listItem.textContent = formValue;
+    listItem.textContent = taskValue + ", " + descriptionValue + ", " + dueDateValue;
     let parent = id("list");
     listItem.addEventListener("click", e => {finishedTask(e)});
     parent.appendChild(listItem);
