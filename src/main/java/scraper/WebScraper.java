@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 public class WebScraper {
-    private final String courseId;
+    private final int id;
     private Set<String> keywords;
 
-    public WebScraper(String courseId) {
-        this.courseId = courseId;
+    public WebScraper(int id) {
+        this.id = id;
 
         // possible keywords to find page of assignments
         keywords = new HashSet<String>(List.of("assignment", "lab", "homework", "exercise",
@@ -34,7 +34,7 @@ public class WebScraper {
         // TODO: implement function #1
         // TODO: assume quarter to be 23sp for demo. Will be replaced with a function
         // finds the web page for the course id
-        String html = "https://courses.cs.washington.edu/courses/" + this.courseId + "/";
+        String html = "https://courses.cs.washington.edu/courses/cse" + this.id + "/";
         Document doc = Jsoup.connect(html).get();
 
         // get the element where the current quarter course is located
@@ -76,7 +76,7 @@ public class WebScraper {
                         String title = cols.get(0).text(); // title is in the first column
                         Date dueDate = formatter.parse(cols.get(2).text()); // due date is in the third column
 
-                        ToDoItem item = new ToDoItem(null, title, this.courseId, dueDate);
+                        ToDoItem item = new ToDoItem(null, title, this.id, dueDate);
                         todoItems.add(item);
                     }
                 }
