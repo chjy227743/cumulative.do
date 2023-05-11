@@ -2,6 +2,9 @@ package scraper;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import model.ToDoItem;
+import scraper.WebScraper;
+import java.util.Set;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 
@@ -40,7 +43,22 @@ public class WebScrapperTest {
 
     @Test
     public void parseToDoTest() {
-        // TODO: add test for parseToDo
+
+        // Initialize the WebScraper with a known course ID
+        WebScraper scraper = new WebScraper("cse331");
+
+        Set<ToDoItem> todoItems = scraper.parseToDo();
+
+        // Assert that the returned set is not empty
+        assertFalse(todoItems.isEmpty());
+
+        // For each ToDoItem, assert that the id, todo, course, and dueDate fields are not null or empty
+        for (ToDoItem item : todoItems) {
+            assertNotNull(item.getId());
+            assertFalse(item.getTodo().isEmpty());
+            assertEquals("cse331", item.getCourse());
+            assertNotNull(item.getDueDate());
+        }
     }
 
 }
