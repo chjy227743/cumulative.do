@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ToDoItemControllerTest {
     private ToDoItemController toDoItemController;
     private ToDoItem testTodoItem;
-    private long testUserId;
+    private String testUserName;
     private String testTodo;
     private String course;
     private Date due;
@@ -26,7 +26,7 @@ public class ToDoItemControllerTest {
     @BeforeEach
     public void setUp() {
         toDoItemController = new ToDoItemController();
-        testUserId = 1L;
+        testUserName = "usr1";
         testTodo = "Test Task";
         course = "Test course";
         due = new Date();
@@ -36,9 +36,9 @@ public class ToDoItemControllerTest {
     @Test
     public void addItemsExistingUserTest() {
         // Add an item to the user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserId, testTodo, course, due);
+        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, course, due);
         assertEquals(testTodoItem, response.getBody());
-        Set<ToDoItem> todoItems = toDoItemController.getTodoItems(testUserId).getBody();
+        Set<ToDoItem> todoItems = toDoItemController.getTodoItems(testUserName).getBody();
 
         // test if the todoItem is in user and the status is correct
         assert todoItems != null;
@@ -50,10 +50,10 @@ public class ToDoItemControllerTest {
     @Test
     public void getItemsExistingUserTest() {
         // Add a todo item for the test user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserId, testTodo, course, due);
+        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, course, due);
         assertEquals(testTodoItem, response.getBody());
 
-        ResponseEntity<Set<ToDoItem>> getResponse = toDoItemController.getTodoItems(testUserId);
+        ResponseEntity<Set<ToDoItem>> getResponse = toDoItemController.getTodoItems(testUserName);
         Set<ToDoItem> todoItems = getResponse.getBody();
 
 
@@ -64,7 +64,7 @@ public class ToDoItemControllerTest {
 
     @Test
     public void getItemNotExistingUserTest() {
-        ResponseEntity<?> response = toDoItemController.getTodoItems(testUserId);
+        ResponseEntity<?> response = toDoItemController.getTodoItems(testUserName);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(null, response.getBody());

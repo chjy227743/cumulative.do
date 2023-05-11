@@ -46,10 +46,10 @@ public class WebScraper {
         return curQuarterURL;
     }
 
-        /**
-         * Parse todos from assignment page.
-         * @return The set of to do items from the course website.
-         */
+    /**
+     * Parse todos from assignment page.
+     * @return The set of to do items from the course website.
+     */
     public Set<ToDoItem> parseToDo() {
         // TODO: implement function #4
         // inspect table? tag is <tr>

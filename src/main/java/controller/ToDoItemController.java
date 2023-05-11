@@ -10,7 +10,7 @@ import java.util.*;
 @RequestMapping("/api/todoItem")
 public class ToDoItemController {
     // key for Map is user id which is mapped to the set of todo items
-    private Map<Long, Set<ToDoItem>> items;
+    private Map<String, Set<ToDoItem>> items;
     private long id;
 
     public ToDoItemController() {
@@ -20,19 +20,19 @@ public class ToDoItemController {
     /**
      * Adds a new ToDo item for the user.
      *
-     * @param userId A user id of the User that the ToDo item belongs to.
+     * @param userName A user id of the User that the ToDo item belongs to.
      * @param todo The description of the todo item to be added.
      * @param course The course of the todo item to be added.
      * @param due The due date of the todo item to be added.
      * @return A ResponseEntity containing the created ToDo item, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody long userId, String todo, String course, Date due) {
-        Set<ToDoItem> existingItems = items.get(userId);
+    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, String course, Date due) {
+        Set<ToDoItem> existingItems = items.get(userName);
         ToDoItem todoItem = new ToDoItem(id, todo, course, due);
         id++;
         existingItems.add(todoItem);
-        items.put(userId, existingItems);
+        items.put(userName, existingItems);
 
         // Return the ResponseEntity with the added todoItem and HTTP status code 201 (Created)
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
@@ -41,17 +41,17 @@ public class ToDoItemController {
     /**
      * Retrieves all ToDo items for a specific user.
      *
-     * @param userId The ID of the user whose ToDo items are to be fetched.
+     * @param userName The ID of the user whose ToDo items are to be fetched.
      * @return A ResponseEntity containing a list of the user's ToDo items, with an HTTP status code.
      */
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable long userId) {
+    public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable String userName) {
 
-        if (!items.containsKey(userId)) {
+        if (!items.containsKey(userName)) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        Set<ToDoItem> todoItems = items.get(userId);
+        Set<ToDoItem> todoItems = items.get(userName);
 
         return new ResponseEntity<>(todoItems, HttpStatus.OK);
     }
@@ -59,16 +59,16 @@ public class ToDoItemController {
     /**
      * Deletes a todo item for the user with userId.
      *
-     * @param userId The ID of the user whose ToDo item is to be removed from.
+     * @param userName The ID of the user whose ToDo item is to be removed from.
      * @param todoItem The todoItem to remove.
      * @return A ResponseEntity containing the user's removed todoItem, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody long userId, ToDoItem todoItem) {
+    public ResponseEntity<ToDoItem> deleteTodoItem(@RequestBody String userName, ToDoItem todoItem) {
         UserController user = new UserController();
         // if the user is logged in
-        if (user.loggedIn(userId , null)) {
-            Set<ToDoItem> existingItems = items.get(userId);
+        if (user.loggedIn(userName , null)) {
+            Set<ToDoItem> existingItems = items.get(userName);
             existingItems.remove(todoItem);
             return new ResponseEntity<>(todoItem, HttpStatus.OK);
         }
@@ -78,16 +78,16 @@ public class ToDoItemController {
     /**
      * Marks a todo item for the user with userId as complete.
      *
-     * @param userId The ID of the user whose ToDo item is marked as complete.
+     * @param userName The ID of the user whose ToDo item is marked as complete.
      * @param todoItem The todoItem to mark as complete.
      * @return A ResponseEntity containing the user's completed todoItem, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> completeToDoItem(@RequestBody long userId, ToDoItem todoItem) {
+    public ResponseEntity<ToDoItem> completeToDoItem(@RequestBody String userName, ToDoItem todoItem) {
         UserController user = new UserController();
         // if the user is logged in
-        if (user.loggedIn(userId , null)) {
-            Set<ToDoItem> existingItems = items.get(userId);
+        if (user.loggedIn(userName , null)) {
+            Set<ToDoItem> existingItems = items.get(userName);
             if (existingItems.contains(todoItem))
                 todoItem.markComplete();
 

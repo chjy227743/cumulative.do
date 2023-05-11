@@ -1,2 +1,3 @@
-UserControllerTest.class
-ToDoItemControllerTest.class
+scraper/WebScrapperTest.class
+controller/UserControllerTest.class
+controller/ToDoItemControllerTest.class

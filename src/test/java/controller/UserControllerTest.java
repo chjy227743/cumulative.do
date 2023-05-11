@@ -26,7 +26,7 @@ public class UserControllerTest {
     @BeforeEach
     public void setUp() {
         userController = new UserController();
-        testUser1 = new User(1L, "john.doe@example.com", "12341234");
+        testUser1 = new User("john.doe@example.com", "12341234");
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
