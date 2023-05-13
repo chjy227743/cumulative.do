@@ -12,6 +12,7 @@ import java.util.Set;
 
 import model.*;
 import controller.*;
+import service.ToDoService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ public class ToDoItemControllerTest {
 
     @BeforeEach
     public void setUp() {
-        toDoItemController = new ToDoItemController();
+        toDoItemController = new ToDoItemController(new ToDoService());
         testUserName = "usr1";
         testTodo = "Test Task";
         courseId = 344;

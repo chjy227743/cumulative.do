@@ -1,8 +1,10 @@
 package controller;
 
 import model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import service.ToDoService;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -11,12 +13,11 @@ import java.util.*;
 @RequestMapping("/api/todoItem")
 public class ToDoItemController {
     // key for Map is user id which is mapped to the set of todo items
-    private Map<String, Set<ToDoItem>> items;
-    private long id;
+    private final ToDoService service;
 
-    public ToDoItemController() {
-        this.items = new HashMap<>();
-        this.id = 0;
+    @Autowired
+    public ToDoItemController(ToDoService service) {
+        this.service = service;
     }
     /**
      * Adds a new ToDo item for the user.
@@ -29,11 +30,8 @@ public class ToDoItemController {
      */
     @PostMapping
     public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, int courseId, LocalDate due) {
-        Set<ToDoItem> existingItems = items.get(userName);
-        ToDoItem todoItem = new ToDoItem(todo, courseId, due);
-        id++;
-        existingItems.add(todoItem);
-        items.put(userName, existingItems);
+        ToDoItem addItem = new ToDoItem(todo, courseId, due);
+        ToDoItem todoItem = service.addTodoItem(userName, addItem);
 
         // Return the ResponseEntity with the added todoItem and HTTP status code 201 (Created)
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
@@ -47,12 +45,11 @@ public class ToDoItemController {
      */
     @GetMapping("/user/{userId}")
     public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable String userName) {
-
-        if (!items.containsKey(userName)) {
+        if (!service.hasUsername(userName)) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        Set<ToDoItem> todoItems = items.get(userName);
+        Set<ToDoItem> todoItems = service.getTodoItems(userName);
 
         return new ResponseEntity<>(todoItems, HttpStatus.OK);
     }
@@ -69,9 +66,8 @@ public class ToDoItemController {
         UserController user = new UserController();
         // if the user is logged in
         if (user.loggedIn(userName , null)) {
-            Set<ToDoItem> existingItems = items.get(userName);
-            existingItems.remove(todoItem);
-            return new ResponseEntity<>(todoItem, HttpStatus.OK);
+            ToDoItem item = service.deleteTodoItem(userName, todoItem);
+            return new ResponseEntity<>(item, HttpStatus.OK);
         }
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
     }
@@ -88,17 +84,10 @@ public class ToDoItemController {
         UserController user = new UserController();
         // if the user is logged in
         if (user.loggedIn(userName , null)) {
-            Set<ToDoItem> existingItems = items.get(userName);
-            if (existingItems.contains(todoItem))
-                todoItem.markComplete();
+            ToDoItem item = service.completeTodoItem(userName, todoItem);
 
-            return new ResponseEntity<>(todoItem, HttpStatus.OK);
+            return new ResponseEntity<>(item, HttpStatus.OK);
         }
         return new ResponseEntity<>(todoItem, HttpStatus.BAD_REQUEST);
-    }
-
-    public long getId() {
-        id++;
-        return id;
     }
 }
