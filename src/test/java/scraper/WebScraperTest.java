@@ -3,20 +3,18 @@ package scraper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import model.ToDoItem;
-import scraper.WebScraper;
+
 import java.util.Set;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
 import java.util.*;
 
 
-public class WebScrapperTest {
+public class WebScraperTest {
     @Test
     public void fetchUrlTest() throws IOException {
         WebScraper ws = new WebScraper(421);
-        assertEquals("https://courses.cs.washington.edu/courses/cse521/22au/", ws.fetchCurrentURL());
+        assertEquals("https://courses.cs.washington.edu/courses/cse521/22au/", ws.getCurQuarter());
     }
 
     @Test
@@ -59,6 +57,17 @@ public class WebScrapperTest {
 //            assertEquals(331, item.getCourse());
             assertNotNull(item.getDueDate());
         }
+    }
+
+    @Test
+    public void parse331Test() {
+
+        // Initialize the WebScraper with a known course ID
+        WebScraper scraper = new WebScraper(331);
+
+        Set<ToDoItem> todoItems = scraper.parseToDo();
+
+        System.out.println(todoItems);
     }
 
 }
