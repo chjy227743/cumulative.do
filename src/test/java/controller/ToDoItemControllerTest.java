@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class ToDoItemControllerTest {
     private String testUserName;
     private String testTodo;
     private int courseId;
-    private Date due;
+    private LocalDate due;
 
     @BeforeEach
     public void setUp() {
@@ -29,8 +30,8 @@ public class ToDoItemControllerTest {
         testUserName = "usr1";
         testTodo = "Test Task";
         courseId = 344;
-        due = new Date();
-        testTodoItem = new ToDoItem(1L, testTodo, courseId, due);
+        due = LocalDate.of(2020,1,1);
+        testTodoItem = new ToDoItem(testTodo, courseId, due);
     }
 
     @Test

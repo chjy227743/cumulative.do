@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 //@Entity
@@ -21,19 +22,18 @@ public class ToDoItem {
     private String todo;
     private boolean completed;
     private int courseId;
-    private Date dueDate;
+    private LocalDate dueDate;
 
     /**
      * Constructs a ToDoItem with the specified id, task description, course, and due date.
      * The completion status is set to false by default.
      *
-     * @param id      the unique identifier for the to-do item
      * @param todo    the task description
      * @param courseId  the associated course code for the task
      * @param dueDate the due date for the task
      */
-    public ToDoItem(Long id, String todo, int courseId, Date dueDate) {
-        this.id = id;
+    public ToDoItem(String todo, int courseId, LocalDate dueDate) {
+        // this.id = 1;
         this.todo = todo;
         this.completed = false;
         this.courseId = courseId;

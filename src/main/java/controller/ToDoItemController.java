@@ -4,6 +4,7 @@ import model.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -27,9 +28,9 @@ public class ToDoItemController {
      * @return A ResponseEntity containing the created ToDo item, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, int courseId, Date due) {
+    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, int courseId, LocalDate due) {
         Set<ToDoItem> existingItems = items.get(userName);
-        ToDoItem todoItem = new ToDoItem(id, todo, courseId, due);
+        ToDoItem todoItem = new ToDoItem(todo, courseId, due);
         id++;
         existingItems.add(todoItem);
         items.put(userName, existingItems);

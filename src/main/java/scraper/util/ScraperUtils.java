@@ -1,5 +1,6 @@
 package scraper.util;
 
+import controller.ToDoItemController;
 import model.ToDoItem;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -8,6 +9,9 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class ScraperUtils {
@@ -25,7 +29,6 @@ public class ScraperUtils {
     }
 
     public static Set<ToDoItem> parse331(String url) throws IOException {
-        Set<ToDoItem> todos = new HashSet<>();
 
         String navBarUrl = url + navBar;
         Document doc = Jsoup.connect(navBarUrl).get();
@@ -50,10 +53,37 @@ public class ScraperUtils {
             }
         }
 
+        doc = Jsoup.connect(keywordUrl).get();
+        Element table = doc.getElementsByClass("listtable").first();
+        Elements rows = table.getElementsByTag("tr");
+        rows.remove(0);
 
+        Set<ToDoItem> todos = new HashSet<>();
+        for (Element row : rows) {
+            System.out.println(1);
+            Element dateCol = row.getElementsByTag("td").first();
+            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
+            LocalDate date = parseDate(dateString, 2023);
+            Element hwCol = row.getElementsByTag("td").get(1).getElementsByTag("a").first();
+            String hwString;
+            if (hwCol == null) {
+                hwCol = row.getElementsByTag("td").get(1).getElementsByTag("span").first();
+                hwString = ((TextNode) hwCol.childNode(0)).getWholeText().split(" ")[0];
+            } else {
+                hwString = ((TextNode) hwCol.childNode(0)).getWholeText();
+            }
+            System.out.println(hwString);
+            todos.add(new ToDoItem(hwString, 331, date));
+        }
 
+        return todos;
+    }
 
-        return null;
+    private static LocalDate parseDate(String dateString, int year) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d yyyy");
+        String[] parts = dateString.split(" ");
+        String cleanedDateString = parts[0] + " " + parts[parts.length - 1];
+        return LocalDate.parse(cleanedDateString + " " + year, formatter);
     }
 
     public static Set<ToDoItem> parse333() {
