@@ -22,14 +22,14 @@ public class ToDoItemController {
      *
      * @param userName A user id of the User that the ToDo item belongs to.
      * @param todo The description of the todo item to be added.
-     * @param course The course of the todo item to be added.
+     * @param courseId The course of the todo item to be added.
      * @param due The due date of the todo item to be added.
      * @return A ResponseEntity containing the created ToDo item, with an HTTP status code.
      */
     @PostMapping
-    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, String course, Date due) {
+    public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, int courseId, Date due) {
         Set<ToDoItem> existingItems = items.get(userName);
-        ToDoItem todoItem = new ToDoItem(id, todo, course, due);
+        ToDoItem todoItem = new ToDoItem(id, todo, courseId, due);
         id++;
         existingItems.add(todoItem);
         items.put(userName, existingItems);

@@ -3,21 +3,23 @@ package scraper;
 import model.ToDoItem;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.*;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
+import java.text.SimpleDateFormat;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
 
 public class WebScraper {
-    private final String courseId;
+    private final int id;
     private Set<String> keywords;
 
-    public WebScraper(String courseId) {
-        this.courseId = courseId;
+    public WebScraper(int id) {
+        this.id = id;
 
         // possible keywords to find page of assignments
         keywords = new HashSet<String>(List.of("assignment", "lab", "homework", "exercise",
@@ -32,7 +34,7 @@ public class WebScraper {
         // TODO: implement function #1
         // TODO: assume quarter to be 23sp for demo. Will be replaced with a function
         // finds the web page for the course id
-        String html = "https://courses.cs.washington.edu/courses/" + this.courseId + "/";
+        String html = "https://courses.cs.washington.edu/courses/cse" + this.id + "/";
         Document doc = Jsoup.connect(html).get();
 
         // get the element where the current quarter course is located
@@ -52,8 +54,39 @@ public class WebScraper {
      */
     public Set<ToDoItem> parseToDo() {
         // TODO: implement function #4
-        // inspect table? tag is <tr>
-        return null;
+
+        Set<ToDoItem> todoItems = new HashSet<>();
+        // adjust the format to match the website's date format
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+        try {
+            // URLs of assignment related pages
+            Set<String> assignmentUrls = findKeywordURL();
+
+            for(String url: assignmentUrls) {
+                Document doc = Jsoup.connect(url).get();
+                // select rows in table with id 'hwlist'
+                Elements rows = doc.select("table#hwlist tr");
+                for (Element row : rows) {
+                    // select cells in each row
+                    Elements cols = row.select("td");
+
+                    // Ensure there are at least 3 columns (for title and due date)
+                    if(cols.size() >= 3) {
+                        String title = cols.get(0).text(); // title is in the first column
+                        Date dueDate = formatter.parse(cols.get(2).text()); // due date is in the third column
+
+                        ToDoItem item = new ToDoItem(null, title, this.id, dueDate);
+                        todoItems.add(item);
+                    }
+                }
+            }
+        }catch (IOException e) {
+            System.out.println("IOException in parseToDo" + e.getStackTrace());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return todoItems;
     }
 
 

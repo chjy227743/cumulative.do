@@ -20,7 +20,7 @@ public class ToDoItem {
     private Long id;
     private String todo;
     private boolean completed;
-    private String course;
+    private int courseId;
     private Date dueDate;
 
     /**
@@ -29,14 +29,14 @@ public class ToDoItem {
      *
      * @param id      the unique identifier for the to-do item
      * @param todo    the task description
-     * @param course  the associated course for the task
+     * @param courseId  the associated course code for the task
      * @param dueDate the due date for the task
      */
-    public ToDoItem(Long id, String todo, String course, Date dueDate) {
+    public ToDoItem(Long id, String todo, int courseId, Date dueDate) {
         this.id = id;
         this.todo = todo;
         this.completed = false;
-        this.course = course;
+        this.courseId = courseId;
         this.dueDate = dueDate;
     }
 

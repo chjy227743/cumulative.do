@@ -2,6 +2,9 @@ package scraper;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import model.ToDoItem;
+import scraper.WebScraper;
+import java.util.Set;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 
@@ -12,13 +15,13 @@ import java.util.*;
 public class WebScrapperTest {
     @Test
     public void fetchUrlTest() throws IOException {
-        WebScraper ws = new WebScraper("cse521");
+        WebScraper ws = new WebScraper(421);
         assertEquals("https://courses.cs.washington.edu/courses/cse521/22au/", ws.fetchCurrentURL());
     }
 
     @Test
     public void findAllURLTest() throws IOException {
-        WebScraper ws = new WebScraper("cse421");
+        WebScraper ws = new WebScraper(421);
         var urls = ws.findAllURL();
         assertEquals(3, urls.size());
         assertTrue(urls.containsAll(Arrays.asList(
@@ -29,7 +32,7 @@ public class WebScrapperTest {
 
     @Test
     public void findKeywordURLTest() {
-        WebScraper ws = new WebScraper("cse331");
+        WebScraper ws = new WebScraper(331);
         var urls = ws.findKeywordURL();
         assertEquals(3, urls.size());
         assertTrue(urls.containsAll(Arrays.asList(
@@ -40,7 +43,22 @@ public class WebScrapperTest {
 
     @Test
     public void parseToDoTest() {
-        // TODO: add test for parseToDo
+
+        // Initialize the WebScraper with a known course ID
+        WebScraper scraper = new WebScraper(331);
+
+        Set<ToDoItem> todoItems = scraper.parseToDo();
+
+        // Assert that the returned set is not empty
+        assertFalse(todoItems.isEmpty());
+
+        // For each ToDoItem, assert that the id, todo, course, and dueDate fields are not null or empty
+        for (ToDoItem item : todoItems) {
+            assertNotNull(item.getId());
+            assertFalse(item.getTodo().isEmpty());
+//            assertEquals(331, item.getCourse());
+            assertNotNull(item.getDueDate());
+        }
     }
 
 }

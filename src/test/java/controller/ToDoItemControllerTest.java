@@ -20,7 +20,7 @@ public class ToDoItemControllerTest {
     private ToDoItem testTodoItem;
     private String testUserName;
     private String testTodo;
-    private String course;
+    private int courseId;
     private Date due;
 
     @BeforeEach
@@ -28,15 +28,15 @@ public class ToDoItemControllerTest {
         toDoItemController = new ToDoItemController();
         testUserName = "usr1";
         testTodo = "Test Task";
-        course = "Test course";
+        courseId = 344;
         due = new Date();
-        testTodoItem = new ToDoItem(1L, testTodo, course, due);
+        testTodoItem = new ToDoItem(1L, testTodo, courseId, due);
     }
 
     @Test
     public void addItemsExistingUserTest() {
         // Add an item to the user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, course, due);
+        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, courseId, due);
         assertEquals(testTodoItem, response.getBody());
         Set<ToDoItem> todoItems = toDoItemController.getTodoItems(testUserName).getBody();
 
@@ -50,7 +50,7 @@ public class ToDoItemControllerTest {
     @Test
     public void getItemsExistingUserTest() {
         // Add a todo item for the test user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, course, due);
+        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, courseId, due);
         assertEquals(testTodoItem, response.getBody());
 
         ResponseEntity<Set<ToDoItem>> getResponse = toDoItemController.getTodoItems(testUserName);
