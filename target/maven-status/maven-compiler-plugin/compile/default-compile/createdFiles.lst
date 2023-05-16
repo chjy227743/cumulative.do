@@ -1,7 +1,0 @@
-controller/UserController.class
-scraper/WebScraper.class
-app/CumulativeDo.class
-model/ToDoItem.class
-model/User.class
-controller/ToDoItemController.class
-controller/MainController.class

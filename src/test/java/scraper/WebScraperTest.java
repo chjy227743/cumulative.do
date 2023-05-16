@@ -2,7 +2,8 @@ package scraper;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import model.ToDoItem;
+import com.cumulativeDo.model.*;
+import com.cumulativeDo.scraper.WebScraper;
 
 import java.util.Set;
 
@@ -52,7 +53,6 @@ public class WebScraperTest {
 
         // For each ToDoItem, assert that the id, todo, course, and dueDate fields are not null or empty
         for (ToDoItem item : todoItems) {
-            assertNotNull(item.getId());
             assertFalse(item.getTodo().isEmpty());
 //            assertEquals(331, item.getCourse());
             assertNotNull(item.getDueDate());

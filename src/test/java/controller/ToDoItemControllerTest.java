@@ -10,9 +10,9 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
-import model.*;
-import controller.*;
-import service.ToDoService;
+import com.cumulativeDo.model.*;
+import  com.cumulativeDo.Controller.*;
+import com.cumulativeDo.service.ToDoService;
 
 import static org.junit.jupiter.api.Assertions.*;
 

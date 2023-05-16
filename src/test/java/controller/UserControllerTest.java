@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 
 import java.util.HashSet;
 
-import model.*;
-import controller.*;
+import com.cumulativeDo.model.*;
+import  com.cumulativeDo.Controller.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
