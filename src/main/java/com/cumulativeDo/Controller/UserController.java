@@ -32,6 +32,7 @@ public class UserController {
      * @param user A User object containing the user's details (username, password, email, etc.).
      * @return A ResponseEntity with the HTTP status indicating the success or failure of the user registration.
      */
+    @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         // Check if the user already exists

@@ -44,7 +44,7 @@ public class ToDoItemController {
      * @param userName The ID of the user whose ToDo items are to be fetched.
      * @return A ResponseEntity containing a list of the user's ToDo items, with an HTTP status code.
      */
-//    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable String userName) {
         if (!service.hasUsername(userName)) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
