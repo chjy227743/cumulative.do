@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("api/")
 
 public class UserController {
     // @Autowired
@@ -32,7 +32,7 @@ public class UserController {
      * @param user A User object containing the user's details (username, password, email, etc.).
      * @return A ResponseEntity with the HTTP status indicating the success or failure of the user registration.
      */
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         // Check if the user already exists
         boolean userExists = users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
@@ -57,7 +57,7 @@ public class UserController {
      *         HTTP status code 200 (OK) or an error message with HTTP status
      *         code 401 (Unauthorized) if login failed.
      */
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<?> loginUser(@RequestBody User user, HttpSession session) {
         boolean userExists = users.stream().anyMatch(u -> u.getUsername().equals(user.getUsername()));
 
@@ -86,7 +86,7 @@ public class UserController {
      *         HTTP status code 200 (OK) or an error message with HTTP status
      *         code 401 (Unauthorized) if login failed.
      */
-    @PutMapping("/{userId}")
+    @PutMapping("{userId}")
     public ResponseEntity<?> updateUser(@RequestBody User user, HttpSession session) {
         // Check if the user is logged in
         User loggedInUser = (User) session.getAttribute("loggedInUser");
@@ -122,6 +122,7 @@ public class UserController {
 
 
     // Getters
+    @GetMapping("users")
     public Set<User> getUsers() {
         return this.users;
     }

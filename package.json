@@ -17,6 +17,7 @@
     "url": "https://github.com/chjy227743/cumulative.do/issues"
   },
   "homepage": "https://github.com/chjy227743/cumulative.do#readme",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "express": "^4.18.2",
     "nodemon": "^2.0.22"
