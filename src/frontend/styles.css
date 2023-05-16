@@ -148,3 +148,9 @@ button {
   margin-top: 10px;
   border-color: lavender;
 }
+
+#to-do-list-parent {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+}

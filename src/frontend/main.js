@@ -22,11 +22,21 @@
     let dueDate = id("inputForm3");
     let dueDateValue = dueDate.value;
     let listItem = document.createElement("li");
-    listItem.textContent = taskValue + ", " + descriptionValue + ", " + dueDateValue;
+    listItem.setAttribute("id", "to-do-list-parent");
+    let subListItem1 = document.createElement("p");
+    let subListItem2 = document.createElement("p");
+    let subListItem3 = document.createElement("p");
+    subListItem1.textContent = taskValue;
+    subListItem2.textContent = descriptionValue;
+    subListItem3.textContent = dueDateValue;
+    listItem.appendChild(subListItem1);
+    listItem.appendChild(subListItem2);
+    listItem.appendChild(subListItem3);
     let parent = id("list");
     listItem.addEventListener("click", e => {finishedTask(e)});
     listItem.addEventListener("dblclick", e => {removeTask(e)});
     parent.appendChild(listItem);
+
   }
 
   function finishedTask(event) {
