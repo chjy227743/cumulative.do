@@ -17,8 +17,6 @@
   function insertTask() {
     let task = id("inputForm1");
     let taskValue = task.value;
-    let description = id("inputForm2");
-    let descriptionValue = description.value;
     let dueDate = id("inputForm3");
     let dueDateValueString = dueDate.value;
     let dueDateValue = new Date(dueDateValueString);
@@ -26,12 +24,10 @@
     let subcontainer = document.createElement("article");
     subcontainer.setAttribute("id", "to-do-list-parent");
     let subListItem1 = document.createElement("section");
-    let subListItem2 = document.createElement("section");
     let subListItem3 = document.createElement("section");
     let subListItem4 = document.createElement("section");
     subListItem1.setAttribute("class", "to-do-list-box");
     subListItem1.setAttribute("id", "to-do-list-box-1");
-    subListItem2.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("id", "to-do-list-box-3");
 
@@ -42,16 +38,12 @@
     subListItem4.setAttribute("id", "to-do-list-box-4");
     subListItem4.appendChild(checkbox);
     let subListItem1Content = document.createElement("p");
-    let subListItem2Content = document.createElement("p");
     let subListItem3Content = document.createElement("p");
     subListItem1Content.textContent = taskValue;
-    subListItem2Content.textContent = descriptionValue;
     subListItem3Content.textContent = dueDateValue;
     subListItem1.appendChild(subListItem1Content);
-    subListItem2.appendChild(subListItem2Content);
     subListItem3.appendChild(subListItem3Content);
     subcontainer.appendChild(subListItem1);
-    subcontainer.appendChild(subListItem2);
     subcontainer.appendChild(subListItem3);
     subcontainer.appendChild(subListItem4)
     listItem.appendChild(subcontainer);
