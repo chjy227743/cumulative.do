@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @RestController
-//@RequestMapping("/api/todoItem")
+@RequestMapping("api/")
 public class ToDoItemController {
     // key for Map is user id which is mapped to the set of todo items
     private final ToDoService service;
@@ -29,7 +29,7 @@ public class ToDoItemController {
      * @param due The due date of the todo item to be added.
      * @return A ResponseEntity containing the created ToDo item, with an HTTP status code.
      */
-    @PostMapping
+    @PostMapping("addItem")
     public ResponseEntity<ToDoItem> addTodoItem(@RequestBody String userName, String todo, int courseId, LocalDate due) {
         ToDoItem addItem = new ToDoItem(todo, courseId, due);
         ToDoItem todoItem = service.addTodoItem(userName, addItem);
@@ -44,7 +44,7 @@ public class ToDoItemController {
      * @param userName The ID of the user whose ToDo items are to be fetched.
      * @return A ResponseEntity containing a list of the user's ToDo items, with an HTTP status code.
      */
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}/todos")
     public ResponseEntity<Set<ToDoItem>> getTodoItems(@PathVariable String userName) {
         if (!service.hasUsername(userName)) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -80,7 +80,7 @@ public class ToDoItemController {
      * @param todoItem The todoItem to mark as complete.
      * @return A ResponseEntity containing the user's completed todoItem, with an HTTP status code.
      */
-//    @PostMapping
+    @PostMapping("deleteItem")
     public ResponseEntity<ToDoItem> completeToDoItem(@RequestBody String userName, ToDoItem todoItem) {
         UserController user = new UserController();
         // if the user is logged in
