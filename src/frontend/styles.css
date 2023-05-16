@@ -165,7 +165,8 @@ p {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-left: 15px;
 }
 
 .to-do-list-box {
@@ -177,13 +178,15 @@ p {
 p {
   width: 100%;
   text-align: center;
+  word-break: break-all;
+  white-space: normal;
 }
 
 #to-do-list-box-1 {
   margin-left: 33px;
 }
 
-#to-do-list-box-3 {
+#to-do-list-box-4 {
   margin-right: 33px;
 }
 

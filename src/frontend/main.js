@@ -28,11 +28,19 @@
     let subListItem1 = document.createElement("section");
     let subListItem2 = document.createElement("section");
     let subListItem3 = document.createElement("section");
+    let subListItem4 = document.createElement("section");
     subListItem1.setAttribute("class", "to-do-list-box");
     subListItem1.setAttribute("id", "to-do-list-box-1");
     subListItem2.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("id", "to-do-list-box-3");
+
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("id", "check-box");
+    subListItem4.setAttribute("class", "to-do-list-box");
+    subListItem4.setAttribute("id", "to-do-list-box-4");
+    subListItem4.appendChild(checkbox);
     let subListItem1Content = document.createElement("p");
     let subListItem2Content = document.createElement("p");
     let subListItem3Content = document.createElement("p");
@@ -45,10 +53,11 @@
     subcontainer.appendChild(subListItem1);
     subcontainer.appendChild(subListItem2);
     subcontainer.appendChild(subListItem3);
+    subcontainer.appendChild(subListItem4)
     listItem.appendChild(subcontainer);
     let parent = id("list");
     list.addEventListener("click", e => {finishedTask(e)});
-    list.addEventListener("dblclick", e => {removeTask(e)});
+    checkbox.addEventListener("click", e => {removeTask(e)});
     parent.appendChild(listItem);
   }
 
@@ -61,7 +70,7 @@
   function removeTask(event) {
     let clickedElement = event.target;
     let parent = id("list");
-    parent.removeChild(clickedElement);
+    parent.removeChild(li);
   }
 
 
