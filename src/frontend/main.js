@@ -20,7 +20,8 @@
     let description = id("inputForm2");
     let descriptionValue = description.value;
     let dueDate = id("inputForm3");
-    let dueDateValue = dueDate.value;
+    let dueDateValueString = dueDate.value;
+    let dueDateValue = new Date(dueDateValueString);
     let listItem = document.createElement("li");
     let subcontainer = document.createElement("article");
     subcontainer.setAttribute("id", "to-do-list-parent");
