@@ -22,21 +22,33 @@
     let dueDate = id("inputForm3");
     let dueDateValue = dueDate.value;
     let listItem = document.createElement("li");
-    listItem.setAttribute("id", "to-do-list-parent");
-    let subListItem1 = document.createElement("p");
-    let subListItem2 = document.createElement("p");
-    let subListItem3 = document.createElement("p");
-    subListItem1.textContent = taskValue;
-    subListItem2.textContent = descriptionValue;
-    subListItem3.textContent = dueDateValue;
-    listItem.appendChild(subListItem1);
-    listItem.appendChild(subListItem2);
-    listItem.appendChild(subListItem3);
+    let subcontainer = document.createElement("article");
+    subcontainer.setAttribute("id", "to-do-list-parent");
+    let subListItem1 = document.createElement("section");
+    let subListItem2 = document.createElement("section");
+    let subListItem3 = document.createElement("section");
+    subListItem1.setAttribute("class", "to-do-list-box");
+    subListItem1.setAttribute("id", "to-do-list-box-1");
+    subListItem2.setAttribute("class", "to-do-list-box");
+    subListItem3.setAttribute("class", "to-do-list-box");
+    subListItem3.setAttribute("id", "to-do-list-box-3");
+    let subListItem1Content = document.createElement("p");
+    let subListItem2Content = document.createElement("p");
+    let subListItem3Content = document.createElement("p");
+    subListItem1Content.textContent = taskValue;
+    subListItem2Content.textContent = descriptionValue;
+    subListItem3Content.textContent = dueDateValue;
+    subListItem1.appendChild(subListItem1Content);
+    subListItem2.appendChild(subListItem2Content);
+    subListItem3.appendChild(subListItem3Content);
+    subcontainer.appendChild(subListItem1);
+    subcontainer.appendChild(subListItem2);
+    subcontainer.appendChild(subListItem3);
+    listItem.appendChild(subcontainer);
     let parent = id("list");
-    listItem.addEventListener("click", e => {finishedTask(e)});
-    listItem.addEventListener("dblclick", e => {removeTask(e)});
+    list.addEventListener("click", e => {finishedTask(e)});
+    list.addEventListener("dblclick", e => {removeTask(e)});
     parent.appendChild(listItem);
-
   }
 
   function finishedTask(event) {

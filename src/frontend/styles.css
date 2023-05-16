@@ -149,8 +149,40 @@ button {
   border-color: lavender;
 }
 
+p {
+  width: 33%;
+}
+
 #to-do-list-parent {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
+  /*margin-left: 20px;*/
+
+}
+
+#content-headers {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.to-do-list-box {
+  display: flex;
+  align-items: center;
+  width: 250px;
+}
+
+p {
+  width: 100%;
+  text-align: center;
+}
+
+#to-do-list-box-1 {
+  margin-left: 33px;
+}
+
+#to-do-list-box-3 {
+  margin-right: 33px;
 }
