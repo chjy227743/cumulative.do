@@ -17,7 +17,7 @@ This product will be a to do list web application that aims to collect assignmen
 1. JDK 18- To compile and run the Java code.
 ### Installing JDK 18
 #### For Windows:
-- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase-jdk18-downloads.html
+- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
 - Download the "Windows x64 Installer" if you have a 64-bit version of Windows.
 - After the download is complete, run the installer and follow the instructions. By default, the JDK will be installed in a directory such as C:\Program Files\Java\jdk-18.
 - After installation, you need to set up the environment variable. Go to Control Panel -> System and Security -> System -> Advanced System Settings -> Environment Variables.
