@@ -1,5 +1,6 @@
 package controller;
 
+import com.cumulativeDo.service.ToDoService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,11 +22,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserControllerTest {
     private UserController userController;
     private User testUser1;
+    private ToDoService toDoService;
     private HttpSession testSession;
 
     @BeforeEach
     public void setUp() {
-        userController = new UserController();
+        toDoService = new ToDoService();
+        userController = new UserController(toDoService);
         testUser1 = new User("john.doe@example.com", "12341234");
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);

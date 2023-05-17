@@ -3,21 +3,27 @@ import com.cumulativeDo.model.*;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 @Service
 public class ToDoService {
 
-    private Map<String, Set<ToDoItem>> items;
+    private final Map<String, Set<ToDoItem>> items;
 
     public ToDoService() {
         this.items = new HashMap<>();
     }
 
+    public void addUser(String userName) {
+        items.put(userName, new HashSet<>());
+    }
+
     public ToDoItem addTodoItem(String userName, ToDoItem addItem) {
         Set<ToDoItem> existingItems = items.get(userName);
         existingItems.add(addItem);
+        items.put(userName, existingItems);
         return addItem;
     }
 

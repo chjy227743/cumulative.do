@@ -20,8 +20,8 @@ public class ToDoItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String todo;
     private boolean completed;
-    private int courseId;
-    private LocalDate dueDate;
+    private final Integer courseId;
+    private final LocalDate dueDate;
 
     /**
      * Constructs a ToDoItem with the specified id, task description, course, and due date.
@@ -31,8 +31,7 @@ public class ToDoItem {
      * @param courseId  the associated course code for the task
      * @param dueDate the due date for the task
      */
-    public ToDoItem(String todo, int courseId, LocalDate dueDate) {
-        // this.id = 1;
+    public ToDoItem(String todo, Integer courseId, LocalDate dueDate) {
         this.todo = todo;
         this.completed = false;
         this.courseId = courseId;
@@ -52,6 +51,7 @@ public class ToDoItem {
     }
 
     public int getCourseId() {
+        if (this.courseId == null) return -1;
         return this.courseId;
     }
 

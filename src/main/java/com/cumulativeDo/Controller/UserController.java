@@ -1,6 +1,7 @@
 package com.cumulativeDo.Controller;
 
 import com.cumulativeDo.model.*;
+import com.cumulativeDo.service.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,13 @@ public class UserController {
     // @Autowired
     // private UserRepository userRepository;
     private Set<User> users;
-    private Set<String> loggedUsers;
+    private User loggedUser;
+    private final ToDoService toDoService;
 
-    public UserController() {
+    public UserController(ToDoService toDoService) {
         users = new HashSet<>();
-        loggedUsers = new HashSet<>();
+        loggedUser = null;
+        this.toDoService = toDoService;
     }
 
     // Validate and register user, return appropriate response
@@ -44,6 +47,9 @@ public class UserController {
 
         // Register the new user
         users.add(user);
+        toDoService.addUser(user.getUsername());
+
+        loggedUser = user;
 
         // Return the ResponseEntity with the registered user and HTTP status code 201 (Created)
         return new ResponseEntity<>(user, HttpStatus.CREATED);
@@ -67,13 +73,25 @@ public class UserController {
         if (userExists && isPasswordCorrect(user)) {
             // Store the logged-in user in the session
             session.setAttribute("loggedInUser", user);
-            loggedUsers.add(user.getUsername());
+            loggedUser = user;
             // Return the ResponseEntity with the user and HTTP status code 200 (OK)
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             // Return the ResponseEntity with an error message and HTTP status code 401 (Unauthorized)
             return new ResponseEntity<>("Invalid username or password. Please register if you don't have an account.", HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @GetMapping("getLoggedInUser")
+    public ResponseEntity<?> getLoggedInUser() {
+        if (loggedUser == null) {
+            return new ResponseEntity<>("No user is logged in", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(loggedUser, HttpStatus.OK);
+    }
+
+    public User loggedInUser() {
+        return loggedUser;
     }
 
     // Other UserController methods
@@ -107,9 +125,11 @@ public class UserController {
         }
     }
 
-    public boolean loggedIn(String userName, HttpSession session) {
-        return loggedUsers.contains(userName);
+    public boolean loggedIn(String username) {
+        return loggedUser.getUsername().equals(username);
     }
+
+
 
     private boolean isPasswordCorrect(User user) {
         // TODO: implement password check
@@ -125,14 +145,7 @@ public class UserController {
     // Getters
     @GetMapping("users")
     public Set<User> getUsers() {
-        for(User u : users) {
-            System.out.println(u.getPassword());
-        }
         return this.users;
-    }
-
-    public Set<String> getLoggedUsers() {
-        return this.loggedUsers;
     }
 
 }

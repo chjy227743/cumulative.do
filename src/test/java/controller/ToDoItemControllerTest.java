@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class ToDoItemControllerTest {
     private ToDoItemController toDoItemController;
+    private ToDoService toDoService;
+    private UserController userController;
     private ToDoItem testTodoItem;
     private String testUserName;
     private String testTodo;
@@ -27,7 +29,9 @@ public class ToDoItemControllerTest {
 
     @BeforeEach
     public void setUp() {
-        toDoItemController = new ToDoItemController(new ToDoService());
+        toDoService = new ToDoService();
+        userController = new UserController(toDoService);
+        toDoItemController = new ToDoItemController(toDoService, userController);
         testUserName = "usr1";
         testTodo = "Test Task";
         courseId = 344;
@@ -38,7 +42,7 @@ public class ToDoItemControllerTest {
     @Test
     public void addItemsExistingUserTest() {
         // Add an item to the user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, courseId, due);
+        ResponseEntity<?> response = toDoItemController.addTodoItem(testTodo, courseId, due);
         assertEquals(testTodoItem, response.getBody());
         Set<ToDoItem> todoItems = toDoItemController.getTodoItems(testUserName).getBody();
 
@@ -52,7 +56,7 @@ public class ToDoItemControllerTest {
     @Test
     public void getItemsExistingUserTest() {
         // Add a todo item for the test user
-        ResponseEntity<ToDoItem> response = toDoItemController.addTodoItem(testUserName, testTodo, courseId, due);
+        ResponseEntity<?> response = toDoItemController.addTodoItem(testTodo, courseId, due);
         assertEquals(testTodoItem, response.getBody());
 
         ResponseEntity<Set<ToDoItem>> getResponse = toDoItemController.getTodoItems(testUserName);

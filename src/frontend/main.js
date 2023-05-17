@@ -69,6 +69,36 @@
   function sendDataToBackend(taskValue, dueDateValue) {
     event.preventDefault();
 
+    // First, fetch the logged-in user's data
+    // fetch('http://localhost:8080/api/getLoggedInUser')
+    //     .then(response => response.json())
+    //     .then(user => {
+    //       // Now that we have the user's data, we can add an item to their todo list
+    //       const userNtodoItem = {
+    //         "userName": user.userName,
+    //         "todo": taskValue,
+    //         "completed": false,
+    //         "dueDate": dueDateValue
+    //       };
+    //       return fetch('http://localhost:8080/api/addItem', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(userNtodoItem)
+    //       });
+    //     })
+    //     .then(response => response.json())
+    //     .then(newTodo => {
+    //       // The new todo item was successfully added to the user's todo list
+    //       console.log(newTodo);
+    //     })
+    //     .catch(error => {
+    //       // Handle any errors
+    //       console.error('Error:', error);
+    //     });
+
+
     fetch('http://localhost:8080/api/addItem', {
       method: 'POST',
       headers: {
