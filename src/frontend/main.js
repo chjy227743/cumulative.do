@@ -20,6 +20,7 @@
     let dueDate = id("inputForm3");
     let dueDateValueString = dueDate.value;
     let dueDateValue = new Date(dueDateValueString);
+    sendDataToBackend(taskValue, dueDateValue);
     let listItem = document.createElement("li");
     let subcontainer = document.createElement("article");
     subcontainer.setAttribute("id", "to-do-list-parent");
@@ -63,6 +64,36 @@
     let clickedElement = event.target;
     let parent = id("list");
     parent.removeChild(li);
+  }
+
+
+
+    private String todo;
+    private boolean completed;
+    private int courseId;
+    private LocalDate dueDate;
+
+
+
+  function sendDataToBackend(taskValue, dueDateValue) {
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/addItem', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "todo": taskValue,
+        "completed": false,
+        "dueDate": dueDateValue
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
 
