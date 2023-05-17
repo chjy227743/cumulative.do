@@ -59,10 +59,15 @@ To run the tests using Maven: ./gradlew test
 This command will run all the test cases in the project. If the tests pass, you will see a "BUILD SUCCESS" message at the end of the output, along with a summary of the test results.
 Remember that the tests require a working internet connection to function correctly since they interact with the web scraper component. If you encounter issues while running the tests, please ensure that you have a stable internet connection and that the target websites are accessible.
 
-### Run Frontend
+### Run application
 
-1. Go to directory `src/frontend`
-2. Click open `login.html` to launch the webpage
+1. With the complete project repository cloned, run the application from `java/com/cumulativeDo/CumulativeDo.java`
+2. Then, run `npm start` to retrieve the frontend link.
+3. Click on the link, which should be http://localhost:3000 to open
+4. To view the root of our Springboot/backend server, open a new tab on your browser and visit http://localhost:8080/api.
+5. To view the list of users registered in the application, use the link http://localhost:8080/api/users.
+
+
 
 ## Operational Use Cases:
 
