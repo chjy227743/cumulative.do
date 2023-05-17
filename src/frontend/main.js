@@ -66,15 +66,6 @@
     parent.removeChild(li);
   }
 
-
-
-    private String todo;
-    private boolean completed;
-    private int courseId;
-    private LocalDate dueDate;
-
-
-
   function sendDataToBackend(taskValue, dueDateValue) {
     event.preventDefault();
 
