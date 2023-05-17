@@ -26,13 +26,13 @@ This product will be a to do list web application that aims to collect assignmen
 - Open a new Command Prompt (cmd) and type java -version to verify that JDK 18 is correctly installed.
 
 #### For MacOS:
-- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase-jdk18-downloads.html
+- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
 - Download the "macOS Installer".
 - After the download is complete, run the installer and follow the instructions.
 - After installation, open Terminal and type java -version to verify that JDK 18 is correctly installed.
 
 #### For Linux:
-- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase-jdk18-downloads.html
+- Go to Oracle's JDK download page: https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html
 - Download the "Linux Compressed Archive" for your specific version of Linux.
 - Open Terminal and navigate to the directory where the .tar.gz file was downloaded.
 - Extract the archive with the command tar -xvf [file name].
