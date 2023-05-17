@@ -6,9 +6,12 @@ This product will be a to do list web application that aims to collect assignmen
 
 ## Repository Layout:
 
+- All frontend code are contained in src/frontend.
 - All backend code contained in src/main/java.
 - All configuration/set up content contained in .idea folder.
 - All tests will be contained in the tests folder.
+- All documentations are in the top level.
+
 
 ## Prerequisites:
 1. JDK 18- To compile and run the Java code.
