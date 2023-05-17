@@ -19,17 +19,26 @@
     let pswd = id("loginForm2").value;
     username = uName;
     password = pswd;
+    // Prevent the form from being submitted the default way
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "username": username,
+        "password": password
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
     window.location.href = "main.html";
   }
-
-
-/*let formValue = task.value;
-  let listItem = document.createElement("li");
-  listItem.textContent = formValue;
-  let parent = id("list");
-  listItem.addEventListener("click", e => {finishedTask(e)});
-  parent.appendChild(listItem); */
-
 
   /**
    * Returns the element that has the ID attribute with the specified value.
