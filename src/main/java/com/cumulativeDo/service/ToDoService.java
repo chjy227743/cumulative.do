@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Service
+// A service class for todo items. Main description in Controller class.
 public class ToDoService {
 
     private final Map<String, Set<ToDoItem>> items;
