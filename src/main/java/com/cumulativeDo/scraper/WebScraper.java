@@ -8,7 +8,7 @@ import java.util.*;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
-import scraper.util.ScraperUtils;
+import com.cumulativeDo.scraper.util.ScraperUtils;
 import java.text.SimpleDateFormat;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -119,6 +119,20 @@ public class WebScraper {
             try {
                 System.out.println(curQuarterUrl);
                 return ScraperUtils.parse421(curQuarterUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (this.id == 332) {
+            try {
+                System.out.println(curQuarterUrl);
+                return ScraperUtils.parse332(curQuarterUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (this.id == 312) {
+            try {
+                System.out.println(curQuarterUrl);
+                return ScraperUtils.parse312(curQuarterUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }

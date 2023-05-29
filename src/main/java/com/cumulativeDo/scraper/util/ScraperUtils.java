@@ -1,4 +1,4 @@
-package scraper.util;
+package com.cumulativeDo.scraper.util;
 
 import com.cumulativeDo.Controller.ToDoItemController;
 import com.cumulativeDo.model.*;
@@ -138,6 +138,15 @@ public class ScraperUtils {
 
         return todos;
     }
+
+    public static Set<ToDoItem> parse332(String url) throws IOException {
+        return null;
+    }
+
+    public static Set<ToDoItem> parse312(String url) throws IOException {
+        return null;
+    }
+
 
     public static Set<ToDoItem> parse333() {
         return null;
