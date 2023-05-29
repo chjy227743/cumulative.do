@@ -33,6 +33,26 @@ public class WebScraper {
                 "quiz", "exam", "schedule", "calendar"));
     }
 
+    /**
+     * Finds the most recent offering for courseId.
+     * @return The current quarter of the course offering
+     */
+    public String getCurQuarter() {
+        // finds the web page for the course id
+        try {
+            Document doc = Jsoup.connect(this.rootUrl).get();
+            Element content = doc.getElementsByClass("first leaf").first();
+
+            // get the current quarter link
+            Element link = content.getElementsByTag("a").first();
+            String text = ((TextNode) link.childNode(0)).getWholeText();
+
+            return text;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * Finds the course title for courseId.

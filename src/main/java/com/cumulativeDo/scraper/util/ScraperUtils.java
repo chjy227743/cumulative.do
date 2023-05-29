@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -101,40 +102,41 @@ public class ScraperUtils {
 
             menu.put(str.toLowerCase(), link.attr("href"));
         }
+        System.out.println(menu);
 
         String keywordUrl = null;
-        for (String keyword : keywords) {
-            if (menu.containsKey(keyword)) {
-                keywordUrl = url + menu.get(keyword);
-                break;
+        for (String option : menu.keySet()) {
+            String[] splited = option.split(" ");
+            for (String str : splited) {
+                if (keywords.contains(str)) {
+                    keywordUrl = url + menu.get(option);
+                    break;
+                }
+            }
+
+        }
+
+
+        doc = Jsoup.connect(keywordUrl).get();
+
+        Element table = doc.getElementsByTag("table").first();
+
+        Elements rows = table.getElementsByTag("tr");
+        rows.remove(0);
+
+        Set<ToDoItem> todos = new HashSet<>();
+        for (Element row : rows) {
+            Element dateCol = row.getElementsByTag("td").first();
+            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
+            LocalDate date = parseDate(dateString, 2023);
+            Element hwCol = row.getElementsByTag("td").get(1);
+            String hwStr = ((TextNode) hwCol.childNode(0)).getWholeText();
+            if (hwStr.toLowerCase().contains("homework") || hwStr.toLowerCase().contains("exam")) {
+                todos.add(new ToDoItem(hwStr.substring(0, hwStr.length() - 1), 421, date));
             }
         }
-        System.out.println(keywordUrl);
 
-//        doc = Jsoup.connect(keywordUrl).get();
-//        Element table = doc.getElementsByClass("listtable").first();
-//        Elements rows = table.getElementsByTag("tr");
-//        rows.remove(0);
-//
-//        Set<ToDoItem> todos = new HashSet<>();
-//        for (Element row : rows) {
-//            System.out.println(1);
-//            Element dateCol = row.getElementsByTag("td").first();
-//            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
-//            LocalDate date = parseDate(dateString, 2023);
-//            Element hwCol = row.getElementsByTag("td").get(1).getElementsByTag("a").first();
-//            String hwString;
-//            if (hwCol == null) {
-//                hwCol = row.getElementsByTag("td").get(1).getElementsByTag("span").first();
-//                hwString = ((TextNode) hwCol.childNode(0)).getWholeText().split(" ")[0];
-//            } else {
-//                hwString = ((TextNode) hwCol.childNode(0)).getWholeText();
-//            }
-//            System.out.println(hwString);
-//            todos.add(new ToDoItem(hwString, 331, date));
-//        }
-
-        return null;
+        return todos;
     }
 
     public static Set<ToDoItem> parse333() {
