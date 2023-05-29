@@ -30,7 +30,6 @@ public class ScraperUtils {
     }
 
     public static Set<ToDoItem> parse331(String url) throws IOException {
-
         String navBarUrl = url + navBar;
         Document doc = Jsoup.connect(navBarUrl).get();
 
@@ -61,7 +60,6 @@ public class ScraperUtils {
 
         Set<ToDoItem> todos = new HashSet<>();
         for (Element row : rows) {
-            System.out.println(1);
             Element dateCol = row.getElementsByTag("td").first();
             String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
             LocalDate date = parseDate(dateString, 2023);
@@ -73,7 +71,6 @@ public class ScraperUtils {
             } else {
                 hwString = ((TextNode) hwCol.childNode(0)).getWholeText();
             }
-            System.out.println(hwString);
             todos.add(new ToDoItem(hwString, 331, date));
         }
 
@@ -102,7 +99,6 @@ public class ScraperUtils {
 
             menu.put(str.toLowerCase(), link.attr("href"));
         }
-        System.out.println(menu);
 
         String keywordUrl = null;
         for (String option : menu.keySet()) {
@@ -116,9 +112,7 @@ public class ScraperUtils {
 
         }
 
-
         doc = Jsoup.connect(keywordUrl).get();
-
         Element table = doc.getElementsByTag("table").first();
 
         Elements rows = table.getElementsByTag("tr");
@@ -140,6 +134,37 @@ public class ScraperUtils {
     }
 
     public static Set<ToDoItem> parse332(String url) throws IOException {
+        String navBarUrl = url + navBar;
+        Document doc = Jsoup.connect(navBarUrl).get();
+
+        Element content = doc.getElementsByClass("navbar navbar-inverse navbar-fixed-top").first();
+        Elements links = content.getElementsByTag("a");
+
+        Map<String, String> menu = new HashMap<>();
+        for (Element link : links) {
+            // gets menu string
+            String str = ((TextNode) link.childNode(0)).getWholeText();
+            if (str.charAt(str.length()-1) == 's') str = str.substring(0, str.length()-1);
+
+            menu.put(str.toLowerCase(), link.attr("href"));
+        }
+
+        String keywordUrl = null;
+        for (String keyword : keywords) {
+            if (menu.containsKey(keyword)) {
+                keywordUrl = url + menu.get(keyword);
+                break;
+            }
+        }
+
+        doc = Jsoup.connect(keywordUrl).get();
+        Elements tables = doc.getElementsByTag("table");
+
+        for (Element table : tables) {
+            System.out.println(1);
+            System.out.println(table);
+        }
+
         return null;
     }
 
