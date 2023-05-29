@@ -84,6 +84,14 @@ public class ScraperUtils {
         return LocalDate.parse(cleanedDateString + " " + year, formatter);
     }
 
+    private static LocalDate parse312Date(String dateString, int year) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        dateString = dateString.substring(dateString.indexOf("."), dateString.indexOf("at")).replace(".", "");
+        String[] parts = dateString.strip().split(" ");
+        String cleanedDateString = parts[0] + " " + parts[parts.length - 1];
+        return LocalDate.parse(cleanedDateString + " " + year, formatter);
+    }
+
     public static Set<ToDoItem> parse421(String url) throws IOException {
         String navBarUrl = url + navBar;
         Document doc = Jsoup.connect(navBarUrl).get();
@@ -184,41 +192,42 @@ public class ScraperUtils {
 
             menu.put(str.toLowerCase(), link.attr("href"));
         }
-        System.out.println(menu);
 
-//        String keywordUrl = null;
-//        for (String option : menu.keySet()) {
-//            String[] splited = option.split(" ");
-//            for (String str : splited) {
-//                if (keywords.contains(str)) {
-//                    keywordUrl = url + menu.get(option);
-//                    break;
-//                }
-//            }
+        String keywordUrl = null;
+        for (String option : menu.keySet()) {
+            if (menu.keySet().contains("assignments")) {
+                keywordUrl = url + menu.get(option);
+                break;
+            }
+            String[] splited = option.split(" ");
+            for (String str : splited) {
+                if (keywords.contains(str)) {
+                    keywordUrl = url + menu.get(option);
+                    break;
+                }
+            }
+        }
+
+        doc = Jsoup.connect(keywordUrl).get();
+
+        Element table = doc.getElementsByTag("table").first();
+
+        Elements rows = table.getElementsByTag("tr");
+        rows.remove(0);
+
+        Set<ToDoItem> todos = new HashSet<>();
+        for (Element row : rows) {
+            Element dateCol = row.getElementsByTag("td").get(2);
+            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
+            LocalDate date = parse312Date(dateString, 2023);
+            Element hwCol = row.getElementsByTag("td").first();
+            String hwStr = ((TextNode) hwCol.child(0).childNode(0)).getWholeText();
+            if (hwStr!= null) {
+                todos.add(new ToDoItem(hwStr, 312, date));
+            }
+        }
 //
-//        }
-//
-//
-//        doc = Jsoup.connect(keywordUrl).get();
-//
-//        Element table = doc.getElementsByTag("table").first();
-//
-//        Elements rows = table.getElementsByTag("tr");
-//        rows.remove(0);
-//
-//        Set<ToDoItem> todos = new HashSet<>();
-//        for (Element row : rows) {
-//            Element dateCol = row.getElementsByTag("td").first();
-//            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
-//            LocalDate date = parseDate(dateString, 2023);
-//            Element hwCol = row.getElementsByTag("td").get(1);
-//            String hwStr = ((TextNode) hwCol.childNode(0)).getWholeText();
-//            if (hwStr.toLowerCase().contains("homework") || hwStr.toLowerCase().contains("exam")) {
-//                todos.add(new ToDoItem(hwStr.substring(0, hwStr.length() - 1), 421, date));
-//            }
-//        }
-//
-        return null;
+        return todos;
     }
 
 

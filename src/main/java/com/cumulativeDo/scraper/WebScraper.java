@@ -29,7 +29,7 @@ public class WebScraper {
         this.curQuarterUrl = getCurQuarterUrl();
 
         // possible keywords to find page of assignments
-        keywords = new HashSet<String>(List.of("assignment", "lab", "homework", "exercise",
+        keywords = new HashSet<String>(List.of("assignment", "assignments", "lab", "homework", "exercise",
                 "quiz", "exam", "schedule", "calendar"));
     }
 

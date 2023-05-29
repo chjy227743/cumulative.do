@@ -73,6 +73,17 @@ public class WebScraperTest {
 
         Set<ToDoItem> todoItems = scraper.parseToDo();
 
-        System.out.println(todoItems);
+        Set<String> todos = new HashSet<>();
+
+        // the correct todos
+        for (int i = 1; i <= 8; i++) {
+            String todo = "Homework " + i;
+            todos.add(todo);
+        }
+
+        // check if our parsed result contains the correct todos
+        for (ToDoItem item : todoItems) {
+            assertTrue(todos.contains(item.getTodo()));
+        }
     }
 }
