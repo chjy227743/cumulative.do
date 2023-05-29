@@ -54,4 +54,25 @@ public class WebScraperTest {
         System.out.println(todoItems);
     }
 
+    @Test
+    public void parse332Test() {
+
+        // Initialize the WebScraper with a known course ID
+        WebScraper scraper = new WebScraper(332);
+
+        Set<ToDoItem> todoItems = scraper.parseToDo();
+
+        System.out.println(todoItems);
+    }
+
+    @Test
+    public void parse312Test() {
+
+        // Initialize the WebScraper with a known course ID
+        WebScraper scraper = new WebScraper(312);
+
+        Set<ToDoItem> todoItems = scraper.parseToDo();
+
+        System.out.println(todoItems);
+    }
 }
