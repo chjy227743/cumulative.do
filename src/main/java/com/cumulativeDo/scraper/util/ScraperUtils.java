@@ -144,6 +144,55 @@ public class ScraperUtils {
     }
 
     public static Set<ToDoItem> parse312(String url) throws IOException {
+        String navBarUrl = url + navBar;
+        Document doc = Jsoup.connect(navBarUrl).get();
+
+        Element content = doc.getElementsByClass("nav navbar-nav").first();
+        Elements links = content.getElementsByTag("a");
+
+        // get all urls in nav bar
+        Map<String, String> menu = new HashMap<>();
+        for (Element link : links) {
+            // gets menu string
+            String str = ((TextNode) link.childNode(0)).getWholeText();
+            if (str.charAt(str.length()-1) == 's') str = str.substring(0, str.length()-1);
+
+            menu.put(str.toLowerCase(), link.attr("href"));
+        }
+        System.out.println(menu);
+
+//        String keywordUrl = null;
+//        for (String option : menu.keySet()) {
+//            String[] splited = option.split(" ");
+//            for (String str : splited) {
+//                if (keywords.contains(str)) {
+//                    keywordUrl = url + menu.get(option);
+//                    break;
+//                }
+//            }
+//
+//        }
+//
+//
+//        doc = Jsoup.connect(keywordUrl).get();
+//
+//        Element table = doc.getElementsByTag("table").first();
+//
+//        Elements rows = table.getElementsByTag("tr");
+//        rows.remove(0);
+//
+//        Set<ToDoItem> todos = new HashSet<>();
+//        for (Element row : rows) {
+//            Element dateCol = row.getElementsByTag("td").first();
+//            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
+//            LocalDate date = parseDate(dateString, 2023);
+//            Element hwCol = row.getElementsByTag("td").get(1);
+//            String hwStr = ((TextNode) hwCol.childNode(0)).getWholeText();
+//            if (hwStr.toLowerCase().contains("homework") || hwStr.toLowerCase().contains("exam")) {
+//                todos.add(new ToDoItem(hwStr.substring(0, hwStr.length() - 1), 421, date));
+//            }
+//        }
+//
         return null;
     }
 
