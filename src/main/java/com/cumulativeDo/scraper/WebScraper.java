@@ -33,26 +33,6 @@ public class WebScraper {
                 "quiz", "exam", "schedule", "calendar"));
     }
 
-    /**
-     * Finds the most recent offering for courseId.
-     * @return The current quarter of the course offering
-     */
-    public String getCurQuarter() {
-        // finds the web page for the course id
-        try {
-            Document doc = Jsoup.connect(this.rootUrl).get();
-            Element content = doc.getElementsByClass("first leaf").first();
-
-            // get the current quarter link
-            Element link = content.getElementsByTag("a").first();
-            String text = ((TextNode) link.childNode(0)).getWholeText();
-
-            return text;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * Finds the course title for courseId.
@@ -119,58 +99,6 @@ public class WebScraper {
         return null;
     }
 
-
-    /**
-     * Finds the list of keyword related HTML page from all HTML.
-     * @return a set of String representation of the URLs
-     */
-    public Set<String> findKeywordURL() {
-        // TODO: implement function #3
-        Set<String> keywordUrls = new HashSet<>();
-        try {
-            Set<String> urls = findAllURL();
-            for (String url : urls) {
-                Document doc = Jsoup.connect(url).get();
-                String title = doc.title().toLowerCase();
-                boolean containsKeyword = false;
-
-                for (String keyword : keywords) {
-                    keyword = keyword.toLowerCase();
-                    if (url.toLowerCase().contains(keyword) || title.contains(keyword)) {
-                        containsKeyword = true;
-                        break;
-                    }
-                }
-
-                if (containsKeyword) {
-                    keywordUrls.add(url);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("IOException in findKeywordURL" + e.getStackTrace());
-        }
-        return keywordUrls;
-    }
-
-
-    public Set<String> findAllURL() throws IOException {
-        // Finds the list of HTML page accessible from the course website.
-        // TODO: implement function #2
-        Set<String> urls = new HashSet<>();
-
-        Document doc = Jsoup.connect(curQuarterUrl).get();
-        Elements linkElements = doc.select("a");
-
-
-        Element content = doc.body();
-        Elements links = content.getElementsByTag("a");
-        for (Element link : links) {
-            String linkHref = link.attr("href");
-            urls.add(linkHref);
-        }
-
-        return urls;
-    }
 
     private String getCurQuarterUrl() {
         // find the root url
