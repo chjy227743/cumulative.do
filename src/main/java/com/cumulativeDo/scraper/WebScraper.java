@@ -115,6 +115,13 @@ public class WebScraper {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (this.id == 421) {
+            try {
+                System.out.println(curQuarterUrl);
+                return ScraperUtils.parse421(curQuarterUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
