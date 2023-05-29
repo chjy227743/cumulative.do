@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ScraperUtils {
     private static String navBar = "site/nav-bar.html";
@@ -78,10 +80,18 @@ public class ScraperUtils {
     }
 
     private static LocalDate parseDate(String dateString, int year) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d yyyy");
-        String[] parts = dateString.split(" ");
-        String cleanedDateString = parts[0] + " " + parts[parts.length - 1];
-        return LocalDate.parse(cleanedDateString + " " + year, formatter);
+        String[] formats = { "MMMM d yyyy", "MMM d yyyy" };
+        String[] parts = dateString.strip().split(" ");
+        String cleanedDateString = parts[0] + " " + parts[parts.length - 1] + " " + year;
+        for (String format : formats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, Locale.US);
+                return LocalDate.parse(cleanedDateString, formatter);
+            } catch (DateTimeParseException e) {
+                // Do nothing - just try the next format
+            }
+        }
+        throw new IllegalArgumentException("Date '" + dateString + "' could not be parsed");
     }
 
     private static LocalDate parse312Date(String dateString, int year) {
@@ -168,12 +178,43 @@ public class ScraperUtils {
         doc = Jsoup.connect(keywordUrl).get();
         Elements tables = doc.getElementsByTag("table");
 
-        for (Element table : tables) {
-            System.out.println(1);
-            System.out.println(table);
+        Set<ToDoItem> todos = new HashSet<>();
+
+        Element exTable = tables.first();
+        Elements rows = exTable.getElementsByTag("tr");
+        rows.remove(0);
+        for (Element row : rows) {
+            Element hwCol = row.getElementsByTag("td").first();
+            Element dateCol = row.getElementsByTag("td").get(1);
+            String dateString = ((TextNode) dateCol.childNode(0)).getWholeText();
+            if (dateString.equals("CANCELLED")) continue;
+            LocalDate date = parseDate(dateString.split(", ")[1], 2023);
+            String hwStr = ((TextNode) hwCol.child(0).childNode(0)).getWholeText();
+
+            todos.add(new ToDoItem(hwStr, 332, date));
         }
 
-        return null;
+        Element projectTable = tables.get(1);
+        rows = projectTable.getElementsByTag("tr");
+        rows.remove(0);
+        for (Element row : rows) {
+            Element hwCol = row.getElementsByTag("td").first();
+            Element dateCol = row.getElementsByTag("td").get(1);
+
+            String project = ((TextNode) hwCol.child(0).child(0).childNode(0)).getWholeText();
+
+            Elements dates = dateCol.getElementsByTag("hr");
+
+            for (Element item : dates) {
+                String textAfterHr = item.nextSibling().toString();
+                String task = project + textAfterHr.split(": ")[0];
+                String dateString = textAfterHr.split(": ")[1];
+                LocalDate date = parseDate(dateString.split(", ")[1], 2023);
+                todos.add(new ToDoItem(task, 332, date));
+            }
+        }
+
+        return todos;
     }
 
     public static Set<ToDoItem> parse312(String url) throws IOException {
