@@ -1,35 +1,38 @@
 'use strict';
 (function() {
 
-  let username;
-  let password;
-
   window.addEventListener('load', init);
 
   /**
    * initiates page upon load.
    */
   function init() {
-    let loginBtn = id("login-button");
-    loginBtn.addEventListener("click", goToMainPage);
+    let buttonFor331 = id("cse331Button");
+    buttonFor331.addEventListener("click", goToMainPage);
+    let buttonFor312 = id("cse312Button");
+    buttonFor312.addEventListener("click", goToMainPage);
+    let buttonFor421 = id("cse421Button");
+    buttonFor421.addEventListener("click", goToMainPage);
+    let buttonFor332 = id("cse332Button");
+    buttonFor332.addEventListener("click", goToMainPage);
+    let noneButton= id("noneButton");
+    noneButton.addEventListener("click", goToMainPage);
   }
 
   function goToMainPage() {
-    let uName = id("loginForm1").value;
-    let pswd = id("loginForm2").value;
-    username = uName;
-    password = pswd;
-    // Prevent the form from being submitted the default way
-    event.preventDefault();
+    window.location.href = "main.html";
+  }
 
-    fetch('http://localhost:8080/api/register', {
+/*
+    fetch('http://localhost:8080/api/addItem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "username": username,
-        "password": password
+        "todo": taskValue,
+        "completed": false,
+        "dueDate": dueDateValue
       })
     })
     .then(response => response.json())
@@ -37,9 +40,9 @@
     .catch((error) => {
       console.error('Error:', error);
     });
-    window.location.href = "courses.html";
   }
 
+*/
   /**
    * Returns the element that has the ID attribute with the specified value.
    * @param {string} id - element ID.
