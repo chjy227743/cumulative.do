@@ -31,7 +31,6 @@
     subListItem1.setAttribute("id", "to-do-list-box-1");
     subListItem3.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("id", "to-do-list-box-3");
-
     let taskButton = document.createElement("button");
     taskButton.textContent = "Finished";
     taskButton.setAttribute("class", "taskButton");
@@ -49,17 +48,16 @@
     subcontainer.appendChild(subListItem4)
     listItem.appendChild(subcontainer);
     let parent = id("list");
-    list.addEventListener("click", e => {finishedTask(e)});
-    taskButton.addEventListener("click", e => {removeTask(e)});
+    //list.addEventListener("click", e => {finishedTask(e)});
+    taskButton.addEventListener("click", e => {finishTask(e)});
     parent.appendChild(listItem);
   }
 
-  function finishedTask(event) {
-    let clickedElement = event.target;
-    clickedElement.classList.toggle("finished");
+  function finishTask(event) {
+    let elementToRemove = event.target.parentNode.parentNode.parentNode;
     console.log("task is done");
     let parent = id("list");
-    parent.removeChild(li);
+    parent.removeChild(elementToRemove);
   }
 
   /*function removeTask(event) {
