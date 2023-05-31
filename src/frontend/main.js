@@ -20,7 +20,7 @@
     let dueDate = id("inputForm3");
     let dueDateValueString = dueDate.value;
     let dueDateValue = new Date(dueDateValueString);
-    sendDataToBackend(taskValue, dueDateValue);
+   // sendDataToBackend(taskValue, dueDateValue);
     let listItem = document.createElement("li");
     let subcontainer = document.createElement("article");
     subcontainer.setAttribute("id", "to-do-list-parent");
@@ -32,12 +32,12 @@
     subListItem3.setAttribute("class", "to-do-list-box");
     subListItem3.setAttribute("id", "to-do-list-box-3");
 
-    let checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("id", "check-box");
+    let taskButton = document.createElement("button");
+    taskButton.textContent = "Finished";
+    taskButton.setAttribute("class", "taskButton");
     subListItem4.setAttribute("class", "to-do-list-box");
     subListItem4.setAttribute("id", "to-do-list-box-4");
-    subListItem4.appendChild(checkbox);
+    subListItem4.appendChild(taskButton);
     let subListItem1Content = document.createElement("p");
     let subListItem3Content = document.createElement("p");
     subListItem1Content.textContent = taskValue;
@@ -50,7 +50,7 @@
     listItem.appendChild(subcontainer);
     let parent = id("list");
     list.addEventListener("click", e => {finishedTask(e)});
-    checkbox.addEventListener("click", e => {removeTask(e)});
+    taskButton.addEventListener("click", e => {removeTask(e)});
     parent.appendChild(listItem);
   }
 
@@ -58,9 +58,11 @@
     let clickedElement = event.target;
     clickedElement.classList.toggle("finished");
     console.log("task is done");
+    let parent = id("list");
+    parent.removeChild(li);
   }
 
-  function removeTask(event) {
+  /*function removeTask(event) {
     let clickedElement = event.target;
     let parent = id("list");
     parent.removeChild(li);
@@ -117,7 +119,7 @@
     });
   }
 
-
+*/
   /**
    * Returns the element that has the ID attribute with the specified value.
    * @param {string} id - element ID.
