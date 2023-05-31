@@ -1,6 +1,12 @@
 'use strict';
 (function() {
 
+  let cse331Selected;
+  let cse312Selected;
+  let cse421Selected;
+  let cse332Selected;
+  let noneSelected;
+
   window.addEventListener('load', init);
 
   /**
@@ -8,18 +14,61 @@
    */
   function init() {
     let buttonFor331 = id("cse331Button");
-    buttonFor331.addEventListener("click", goToMainPage);
+    buttonFor331.addEventListener("click", e => {selected(e)});
     let buttonFor312 = id("cse312Button");
-    buttonFor312.addEventListener("click", goToMainPage);
+    buttonFor312.addEventListener("click", e => {selected(e)});
     let buttonFor421 = id("cse421Button");
-    buttonFor421.addEventListener("click", goToMainPage);
+    buttonFor421.addEventListener("click", e => {selected(e)});
     let buttonFor332 = id("cse332Button");
-    buttonFor332.addEventListener("click", goToMainPage);
+    buttonFor332.addEventListener("click", e => {selected(e)});
     let noneButton= id("noneButton");
-    noneButton.addEventListener("click", goToMainPage);
+    noneButton.addEventListener("click", e => {selectedNone(e)});
+    let viewListBtn = id("goToMainPageButton");
+    viewListBtn.addEventListener("click", goToMainPage);
+  }
+
+  function selected(event) {
+    let buttonSelected = event.target;
+    buttonSelected.classList.toggle("selected");
+    let noneButton= id("noneButton");
+    noneButton.classList.remove("selected");
+  }
+
+  function selectedNone(event) {
+    let buttonSelected = event.target;
+    buttonSelected.classList.toggle("selected");
+    let buttonFor331 = id("cse331Button");
+    buttonFor331.classList.remove("selected");
+    let buttonFor312 = id("cse312Button");
+    buttonFor312.classList.remove("selected");
+    let buttonFor421 = id("cse421Button");
+    buttonFor421.classList.remove("selected");
+    let buttonFor332 = id("cse332Button");
+    buttonFor332.classList.remove("selected");
   }
 
   function goToMainPage() {
+    // Prevent the form from being submitted the default way
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "cse331": cse331Selected,
+        "cse312": cse312Selected,
+        "cse421": cse421Selected,
+        "cse332": cse332Selected,
+        "none": noneSelected
+      })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
     window.location.href = "main.html";
   }
 
