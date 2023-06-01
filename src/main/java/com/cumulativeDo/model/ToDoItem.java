@@ -21,7 +21,7 @@ public class ToDoItem {
     private String todo;
     private boolean completed;
     private final Integer courseId;
-    private final LocalDate dueDate;
+    public final LocalDate dueDate;
 
     /**
      * Constructs a ToDoItem with the specified id, task description, course, and due date.

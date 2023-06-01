@@ -3,7 +3,11 @@ package com.cumulativeDo.Controller;
 import com.cumulativeDo.model.Course;
 import com.cumulativeDo.model.ToDoItem;
 import com.cumulativeDo.model.User;
+import com.cumulativeDo.scraper.util.ScraperUtils;
 import com.cumulativeDo.service.ToDoService;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,19 +52,34 @@ public class CourseController {
 
         if (todos == null) return new ResponseEntity<>("Course not supported", HttpStatus.BAD_REQUEST);
 
-        Gson gson = new Gson();
-        String jsonTodoList = gson.toJson(todos);
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
 
+        String json = gson.toJson(todos);
 
         // Return the ResponseEntity with the registered user and HTTP status code 201 (Created)
-        return new ResponseEntity<>(jsonTodoList, HttpStatus.CREATED);
+        return new ResponseEntity<>(json, HttpStatus.CREATED);
     }
-
-
 
     // Getters
     @GetMapping("courses")
     public Set<Course> getCourses() {
         return this.courses;
+    }
+
+
+
+    class LocalDateAdapter extends TypeAdapter<LocalDate> {
+
+        @Override
+        public void write(JsonWriter jsonWriter, LocalDate localDate) throws IOException {
+            jsonWriter.value(localDate.toString());
+        }
+
+        @Override
+        public LocalDate read(JsonReader jsonReader) throws IOException {
+            return LocalDate.parse(jsonReader.nextString());
+        }
     }
 }

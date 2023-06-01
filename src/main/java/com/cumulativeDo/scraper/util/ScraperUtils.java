@@ -2,6 +2,12 @@ package com.cumulativeDo.scraper.util;
 
 import com.cumulativeDo.Controller.ToDoItemController;
 import com.cumulativeDo.model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -73,7 +79,7 @@ public class ScraperUtils {
             } else {
                 hwString = ((TextNode) hwCol.childNode(0)).getWholeText();
             }
-            todos.add(new ToDoItem(hwString, 331, date));
+            todos.add(new ToDoItem("CSE 331 " + hwString, 331, date));
         }
 
         return todos;
@@ -144,7 +150,7 @@ public class ScraperUtils {
             Element hwCol = row.getElementsByTag("td").get(1);
             String hwStr = ((TextNode) hwCol.childNode(0)).getWholeText();
             if (hwStr.toLowerCase().contains("homework") || hwStr.toLowerCase().contains("exam")) {
-                todos.add(new ToDoItem(hwStr.substring(0, hwStr.length() - 1), 421, date));
+                todos.add(new ToDoItem("CSE 421 " + hwStr.substring(0, hwStr.length() - 1), 421, date));
             }
         }
 
@@ -191,7 +197,7 @@ public class ScraperUtils {
             LocalDate date = parseDate(dateString.split(", ")[1], 2023);
             String hwStr = ((TextNode) hwCol.child(0).childNode(0)).getWholeText();
 
-            todos.add(new ToDoItem(hwStr, 332, date));
+            todos.add(new ToDoItem("CSE 322 " + hwStr, 332, date));
         }
 
         Element projectTable = tables.get(1);
@@ -210,9 +216,10 @@ public class ScraperUtils {
                 String task = project + textAfterHr.split(": ")[0];
                 String dateString = textAfterHr.split(": ")[1];
                 LocalDate date = parseDate(dateString.split(", ")[1], 2023);
-                todos.add(new ToDoItem(task, 332, date));
+                todos.add(new ToDoItem("CSE 322 " + task, 332, date));
             }
         }
+
 
         return todos;
     }
@@ -264,7 +271,7 @@ public class ScraperUtils {
             Element hwCol = row.getElementsByTag("td").first();
             String hwStr = ((TextNode) hwCol.child(0).childNode(0)).getWholeText();
             if (hwStr!= null) {
-                todos.add(new ToDoItem(hwStr, 312, date));
+                todos.add(new ToDoItem("CSE 312 " + hwStr, 312, date));
             }
         }
 //
