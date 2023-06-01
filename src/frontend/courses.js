@@ -123,16 +123,6 @@
   }
 
   async function fetch331() {
-    /*try {
-      let params = new FormData();
-      params.append("331", 331);
-      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
-      await statusCheck(res);
-      res = await res.json();
-      return res;
-    } catch (err) {
-      console.error(err);
-    }*/
     event.preventDefault();
 
     fetch('http://localhost:8080/api/addCourse', {
@@ -151,43 +141,57 @@
   }
 
   async function fetch312() {
-    try {
-      let params = new FormData();
-      params.append("312", 312);
-      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
-      await statusCheck(res);
-      res = await res.json();
-      console.log(res);
-      temp(res);
-    } catch (err) {
-      console.error(err);
-    }
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/addCourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(312)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    return response;
   }
 
   async function fetch421() {
-    try {
-      let params = new FormData();
-      params.append("421", 421);
-      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
-      await statusCheck(res);
-      res = await res.json();
-      return res;
-    } catch (err) {
-      console.error(err);
-    }
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/addCourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(421)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    return response;
   }
 
   async function fetch332() {
-    try {
-      let params = new FormData();
-      params.append("332", 332);
-      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
-      await statusCheck(res);
-      res = await res.json();
-      return res;
-    } catch (err) {
-      console.error(err);
-    }
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/addCourse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(332)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    return response;
   }
 
   function temp(response){
