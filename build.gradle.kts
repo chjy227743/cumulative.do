@@ -19,6 +19,7 @@ dependencies {
 	implementation("org.jsoup:jsoup:1.11.1")
 	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 	compileOnly("org.projectlombok:lombok:1.18.24")
+	implementation("com.google.code.gson:gson:2.8.8")
 }
 
 kotlinLombok {
