@@ -6,6 +6,7 @@
   let cse421Selected = false;
   let cse332Selected = false;
   let noneSelected = false;
+  let tasks = [];
 
   window.addEventListener('load', init);
 
@@ -25,6 +26,9 @@
     noneButton.addEventListener("click", e => {selectedNone(e)});
     let viewListBtn = id("goToMainPageButton");
     viewListBtn.addEventListener("click", goToMainPage);
+    viewListBtn.addEventListener("click", function() {
+      let tasksToSend = goToMainPage();
+    });
   }
 
   function selected331(event) {
@@ -80,9 +84,9 @@
     console.log(cse331Selected);
     console.log(noneSelected);
     // Prevent the form from being submitted the default way
-    event.preventDefault();
+    /*event.preventDefault();
 
-    fetch('http://localhost:8080/api/parseTodo', {
+    fetch('http://localhost:8080/api/addCourse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -99,30 +103,97 @@
     .then(data => console.log(data))
     .catch((error) => {
       console.error('Error:', error);
-    });
-    window.location.href = "main.html";
+    });*/
+
+    if(cse312Selected === true) {
+      tasks[0] = fetch312();
+    }
+    if(cse331Selected === true) {
+      tasks[1] = fetch331();
+    }
+    if(cse332Selected === true) {
+      tasks[2] = fetch332();
+    }
+    if(cse421Selected === true) {
+      tasks[3] = fetch421();
+    }
+   //window.location.href = "main.html";
+    console.log(tasks);
+    return tasks;
   }
 
-/*
-    fetch('http://localhost:8080/api/addItem', {
+  async function fetch331() {
+    /*try {
+      let params = new FormData();
+      params.append("331", 331);
+      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
+      await statusCheck(res);
+      res = await res.json();
+      return res;
+    } catch (err) {
+      console.error(err);
+    }*/
+    event.preventDefault();
+
+    fetch('http://localhost:8080/api/addCourse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        "todo": taskValue,
-        "completed": false,
-        "dueDate": dueDateValue
-      })
+      body: JSON.stringify(331)
     })
     .then(response => response.json())
     .then(data => console.log(data))
     .catch((error) => {
       console.error('Error:', error);
     });
+    return response;
   }
 
-*/
+  async function fetch312() {
+    try {
+      let params = new FormData();
+      params.append("312", 312);
+      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
+      await statusCheck(res);
+      res = await res.json();
+      console.log(res);
+      temp(res);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function fetch421() {
+    try {
+      let params = new FormData();
+      params.append("421", 421);
+      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
+      await statusCheck(res);
+      res = await res.json();
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function fetch332() {
+    try {
+      let params = new FormData();
+      params.append("332", 332);
+      let res = await fetch('http://localhost:8080/api/addCourse', {method: "POST", body: params});
+      await statusCheck(res);
+      res = await res.json();
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function temp(response){
+
+  }
+
   /**
    * Returns the element that has the ID attribute with the specified value.
    * @param {string} id - element ID.
