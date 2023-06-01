@@ -14,6 +14,7 @@ This product will be a to do list web application that aims to collect assignmen
 
 
 ## Prerequisites:
+We recommend to use IntelliJ IDEA to build and run this project.
 1. JDK 18- To compile and run the Java code.
 ### Installing JDK 18
 #### For Windows:
