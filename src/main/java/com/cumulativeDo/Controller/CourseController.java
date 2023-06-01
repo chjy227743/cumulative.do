@@ -30,7 +30,7 @@ public class CourseController {
     }
 
     /**
-     * Registers a new user with the provided user details.
+     * Adds the course.
      *
      * @param courseId A course to be added.
      * @return A ResponseEntity with the HTTP status indicating the success or failure of the user registration.
