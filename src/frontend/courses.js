@@ -26,9 +26,6 @@
     noneButton.addEventListener("click", e => {selectedNone(e)});
     let viewListBtn = id("goToMainPageButton");
     viewListBtn.addEventListener("click", goToMainPage);
-    viewListBtn.addEventListener("click", function() {
-      let tasksToSend = goToMainPage();
-    });
   }
 
   function selected331(event) {
@@ -117,9 +114,9 @@
     if(cse421Selected === true) {
       tasks[3] = fetch421();
     }
-   //window.location.href = "main.html";
+    window.location.href = "main.html";
     console.log(tasks);
-    return tasks;
+    populateToDoList(tasks);
   }
 
   async function fetch331() {
@@ -194,8 +191,61 @@
     return response;
   }
 
-  function temp(response){
+  function populateToDoList(tasksArray){
+    if(tasksArray.length > 0) {
+      //array @ index is an entire json object
+      for(let index = 0; index < tasksArray.length; index++) {
+        let currentAssignment = tasksArray[index];
+        let taskValue = currentAssignment.todo;
+        let dueDate = currentAssignment.dueDate;
+        insertTask(taskValue, dueDate)
+      }
+    }
+  }
 
+  function insertTask(taskValueGiven, dueDateGiven) {
+    console.log("entered")
+    let taskValue = taskValueGiven;
+    let dueDateValueString = 5/5/5;
+    let dueDateValue = new Date(dueDateValueString);
+    // sendDataToBackend(taskValue, dueDateValue);
+    let listItem = document.createElement("li");
+    let subcontainer = document.createElement("article");
+    subcontainer.setAttribute("id", "to-do-list-parent");
+    let subListItem1 = document.createElement("section");
+    let subListItem3 = document.createElement("section");
+    let subListItem4 = document.createElement("section");
+    subListItem1.setAttribute("class", "to-do-list-box");
+    subListItem1.setAttribute("id", "to-do-list-box-1");
+    subListItem3.setAttribute("class", "to-do-list-box");
+    subListItem3.setAttribute("id", "to-do-list-box-3");
+    let taskButton = document.createElement("button");
+    taskButton.textContent = "Finished";
+    taskButton.setAttribute("class", "taskButton");
+    subListItem4.setAttribute("class", "to-do-list-box");
+    subListItem4.setAttribute("id", "to-do-list-box-4");
+    subListItem4.appendChild(taskButton);
+    let subListItem1Content = document.createElement("p");
+    let subListItem3Content = document.createElement("p");
+    subListItem1Content.textContent = taskValue;
+    subListItem3Content.textContent = dueDateValue;
+    subListItem1.appendChild(subListItem1Content);
+    subListItem3.appendChild(subListItem3Content);
+    subcontainer.appendChild(subListItem1);
+    subcontainer.appendChild(subListItem3);
+    subcontainer.appendChild(subListItem4)
+    listItem.appendChild(subcontainer);
+    let parent = id("list");
+    //list.addEventListener("click", e => {finishedTask(e)});
+    taskButton.addEventListener("click", e => {finishTask(e)});
+    parent.appendChild(listItem);
+  }
+
+  function finishTask(event) {
+    let elementToRemove = event.target.parentNode.parentNode.parentNode;
+    console.log("task is done");
+    let parent = id("list");
+    parent.removeChild(elementToRemove);
   }
 
   /**
